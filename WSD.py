@@ -5,7 +5,7 @@ Created on Thu Mar 25 12:48:17 2021
 
 @author: Rina
 """
-import bs4 as bs  # BeautifulSoup\
+import bs4 as bs  # BeautifulSoup
 from bs4 import BeautifulSoup
 import urllib.request
 import re
@@ -13,7 +13,7 @@ import re
 from nltk.tokenize import PunktSentenceTokenizer,sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 
-file = open("/Users/Rina/Downloads/line-data/line-train.xml", "r")
+file = open("/Users/Rina/Documents/DAEMS/AIT590_NLP/WSD/line-data/line-train.xml", "r")
 contents = file.read()
 
 #Preprocessing function
@@ -44,21 +44,22 @@ sent = soup.find_all('s')
 sent = str(sent)
 #preprocess sentences
 clean_sent = textclean(sent)
-
+#parse out instances
 inst = soup.find_all("instance")
-
+#Creating list of all id numbers
 id = []
 for meta in inst:
     x = (meta.attrs['id'])
     id.append(x)
     
-
-for data in amg_word:
+#used to print parsings
+'''for data in amg_word:
     print(data.get_text())
 
 for data in sent:
-    print(data.get_text())    
+    print(data.get_text()) '''   
 
+#Create a dictionary of instance IDs and tokens as the values
 dict = {}
 keys = id
 values = clean_sent
