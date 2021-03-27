@@ -19,6 +19,7 @@ def cleanhtml(raw_html):
   cleantext = re.sub(cleanr, '', raw_html)
   return cleantext
 
+<<<<<<< HEAD
 #Preprocessing function - Tokenizes, removes punctuation and stop words:
 def textclean(sentence):
     
@@ -38,6 +39,8 @@ def textclean(sentence):
     return filtered_sent
 
 
+=======
+>>>>>>> master
 file = open("/Users/Rina/Documents/DAEMS/AIT590_NLP/WSD/line-data/line-train.xml", "r")
 contents = file.read()
 
@@ -56,6 +59,7 @@ context = re.findall(r"<s.*", answer1) #captures the sentence of context.
 context = cleanhtml(str(context)) #gets rid of html tags.
 
 #once every part is separated out then put it into a dictionary.
+<<<<<<< HEAD
 keys_list = senseid
 values_list = Value_sent
 zip_iterator = zip(keys_list, values_list)
@@ -100,3 +104,5 @@ finder.apply_ngram_filter(line_filter)
 for i in finder.score_ngrams(trigram_measures.likelihood_ratio):
     print (i)    
 
+=======
+>>>>>>> master
