@@ -25,7 +25,7 @@ testing_data = sys.argv[2]
 my_decision_list = sys.argv[3]
 
 # Ambiguous word
-root = "line"
+ambg_word = "line"
 
 # initializing the decision list to an empty list
 decision_list = []
@@ -46,27 +46,25 @@ def process_text(text):
     return corpus
 
 
-# Function to retrieve a word at a certain index
-def get_n_word(n, context):
-    root_index = context.index(root)
-    n_word_index = root_index + n
-    if len(context) > n_word_index and n_word_index >= 0:
-        return context[n_word_index]
-    else:
-        return ""
+# This function is to retrieve the collocative words to the ambigious word.
+def find_coll(n, context):
+    ambg_index = context.index(ambg_word)
+    n_word_index = ambg_index + n
+    return context[n_word_index] #indexes the context to get the word
 
-# Function to add a new "condition" learned from the training data to the decision list
-def find_collocation(cfd, data, n):
+
+# This function adds the new conditions based on collocation to the decision list
+def write_cond(cfd, data, n):
     for element in data:
         sense, context = element['sense'], element['text']
-        n_word = get_n_word(n, context)
+        n_word = find_coll(n, context)
         if n_word != '':
-            condition = str(n) + "_word_" + re.sub(r'\_', '', n_word)
-            cfd[condition][sense] += 1
+            cond = 'Position: {}w {}'.format(n, n_word)
+            cfd[cond][sense] += 1
     return cfd
 
 
-# Calculate the logarithm of ratio of sense probabilities
+# To calculate the logarithm of likelihood for ratio of sense probabilities
 def log_likelihood(cpd, rule):
     prob = cpd[rule].prob("phone")
     prob_star = cpd[rule].prob("product")
@@ -82,7 +80,7 @@ def check_rule(context, rule):
     rule_scope, rule_type, rule_feature = rule.split("_")
     rule_scope = int(rule_scope)
     
-    return get_n_word(rule_scope, context) == rule_feature
+    return find_coll(rule_scope, context) == rule_feature
         
 # Function to predict the sense on test data
 def predict(context, majority_label):
@@ -111,12 +109,12 @@ for instance in soup.find_all('instance'):
 
 # Use conditional frequency distribution to add learned rules to the decision list
 cfd = ConditionalFreqDist()
-cfd = find_collocation(cfd, train_data, 1)
-cfd = find_collocation(cfd, train_data, -1)
-cfd = find_collocation(cfd, train_data, 2)
-cfd = find_collocation(cfd, train_data, -2)
-cfd = find_collocation(cfd, train_data, 3)
-cfd = find_collocation(cfd, train_data, -3)
+cfd = write_cond(cfd, train_data, 1)
+cfd = write_cond(cfd, train_data, -1)
+cfd = write_cond(cfd, train_data, 2)
+cfd = write_cond(cfd, train_data, -2)
+cfd = write_cond(cfd, train_data, 3)
+cfd = write_cond(cfd, train_data, -3)
 
 
 
