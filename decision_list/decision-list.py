@@ -1,9 +1,15 @@
 '''
 AIT 590 - Assignment 3 
-
 Team 3 - Rafeef Baamer, Ashish Hingle, Rina Lidder, & Andy Nguyen
+Date: 3/31/2021
+Description:
+Libraries used: 
 
+Additional features: 
 
+Usage Instructions:
+
+Algorithm defined in program:
 
 
 '''
@@ -15,6 +21,7 @@ from nltk.probability import ConditionalFreqDist
 from nltk.probability import ConditionalProbDist
 from nltk.probability import LidstoneProbDist
 from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
 from bs4 import BeautifulSoup
 
 
@@ -29,20 +36,29 @@ ambg_word = "line"
 # initializing the decision list to an empty list
 decision_list = []
 
+# Function to preprocess the text (lower case, remove stopword, stemming and remove html)
+def process_text(unprocessed_text):
+    # lower case all unprocessed text
+    unprocessed_text = unprocessed_text.lower()
 
-# Function to preprocess the textual content
-def process_text(text):
-    text = text.lower()
-
-    # removing the standard stop word from the text
-    stop_words = stopwords.words("english")
-    stop_words.extend(string.punctuation)
+    # save stopwords into a variable for removal
+    sw_p = stopwords.words("english")
     
-    # treating "lines" and "line" as a single entity
-    text = text.replace("lines", "line")
-    corpus = [re.sub(r'[\.\,\?\!\'\"\-\_/]','',w) for w in text.split(" ")]
-    corpus = [w for w in corpus if w not in stop_words and w != '']
-    return corpus
+    # save punctuation symbols into the variable for removal 
+    sw_p.extend(string.punctuation)
+    
+    # stem and replace other forms of the root word in the text for consistency
+    ps = PorterStemmer()   # create a PorterStemmer class
+    other_forms = 'lines'   # indicate other forms of the root word   
+    unprocessed_text = unprocessed_text.replace(other_forms, ps.stem(other_forms))   # convert lines to line using the stemmed root word
+    
+    # remove sumbols that due to html tags
+    processed_text = [re.sub(r'[\.\,\?\!\'\"\-\_/]','',w) for w in unprocessed_text.split(" ")]
+    
+    # remove stopwords and punctuation 
+    processed_text = [w for w in processed_text if w not in sw_p and w != '']
+    
+    return processed_text   # return the processed text to the method that called it
 
 
 # This function is to retrieve the collocative words to the ambigious word.
@@ -117,8 +133,6 @@ cfd = write_cond(cfd, train_data, -2)
 cfd = write_cond(cfd, train_data, 3)
 cfd = write_cond(cfd, train_data, -3)
 
-
-
 # Instantiating Condition probability distribution to calculate the probabilities of the frequencies recorded above
 cpd = ConditionalProbDist(cfd, LidstoneProbDist, 0.1)
 
@@ -166,9 +180,11 @@ for element in test_data:
     predictions.append(f'<answer instance="{id1}" senseid="{pred}"/>')
     print(f'<answer instance="{id1}" senseid="{pred}"/>')
 
-
 # Storing the decision list into a file
-with open(my_decision_list, 'w') as output:  
-    for listitem in decision_list:
-        output.write('%s\n' % listitem)
+writer = open(my_decision_list, 'w')   # open the text file
+
+for i in decision_list:         # loop through the decision list and write it to file
+    writer.write('%s\n' % i)
+
+writer.close()      # close the text file
 
