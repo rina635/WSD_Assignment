@@ -56,7 +56,7 @@ def get_n_word(n, context):
         return ""
 
 # Function to add a new "condition" learned from the training data to the decision list
-def add_word_cond(cfd, data, n):
+def find_collocation(cfd, data, n):
     for element in data:
         sense, context = element['sense'], element['text']
         n_word = get_n_word(n, context)
@@ -111,12 +111,12 @@ for instance in soup.find_all('instance'):
 
 # Use conditional frequency distribution to add learned rules to the decision list
 cfd = ConditionalFreqDist()
-cfd = add_word_cond(cfd, train_data, 1)
-cfd = add_word_cond(cfd, train_data, -1)
-cfd = add_word_cond(cfd, train_data, 2)
-cfd = add_word_cond(cfd, train_data, -2)
-cfd = add_word_cond(cfd, train_data, 3)
-cfd = add_word_cond(cfd, train_data, -3)
+cfd = find_collocation(cfd, train_data, 1)
+cfd = find_collocation(cfd, train_data, -1)
+cfd = find_collocation(cfd, train_data, 2)
+cfd = find_collocation(cfd, train_data, -2)
+cfd = find_collocation(cfd, train_data, 3)
+cfd = find_collocation(cfd, train_data, -3)
 
 
 
