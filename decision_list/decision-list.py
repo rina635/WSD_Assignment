@@ -68,13 +68,12 @@ def write_cond(cfd, data, n):
 
 # To calculate the logarithm of likelihood for ratio of sense probabilities
 def log_likelihood(cpd, rule):
-    prob = cpd[rule].prob("phone")
-    prob_star = cpd[rule].prob("product")
-    div = prob / prob_star
-    if div == 0:
-        return 0
+    s1_prob = cpd[rule].prob("phone")
+    s2_prob = cpd[rule].prob("product")
+    if (s1_prob/s2_prob) != 0:
+        return math.log((s1_prob/s2_prob),2)
     else:
-        return math.log(div, 2)
+        return 0
 
 
 # checking whether the rule is satisfied in a given context
