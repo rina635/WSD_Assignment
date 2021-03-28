@@ -16,6 +16,7 @@ from nltk.probability import ConditionalProbDist
 from nltk.probability import LidstoneProbDist
 from nltk.corpus import stopwords
 from bs4 import BeautifulSoup
+from nltk.collocations import *
 
 
 # command line arguments for the file sources of training data, testing data, decision list
@@ -66,7 +67,7 @@ def add_word_cond(cfd, data, n):
 
 
 # Calculate the logarithm of ratio of sense probabilities
-def calculate_log_likelihood(cpd, rule):
+def log_likelihood(cpd, rule):
     prob = cpd[rule].prob("phone")
     prob_star = cpd[rule].prob("product")
     div = prob / prob_star
@@ -114,18 +115,9 @@ cfd = add_word_cond(cfd, train_data, 1)
 cfd = add_word_cond(cfd, train_data, -1)
 cfd = add_word_cond(cfd, train_data, 2)
 cfd = add_word_cond(cfd, train_data, -2)
-#cfd = add_word_cond(cfd, train_data, 3)
-#cfd = add_word_cond(cfd, train_data, -3)
-#cfd = add_word_cond(cfd, train_data, 4)
-#cfd = add_word_cond(cfd, train_data, -4)
-#cfd = add_word_cond(cfd, train_data, 5)
-#cfd = add_word_cond(cfd, train_data, -5)
-#cfd = add_word_cond(cfd, train_data, 6)
-#cfd = add_word_cond(cfd, train_data, -6)
-#cfd = add_word_cond(cfd, train_data, 7)
-#cfd = add_word_cond(cfd, train_data, -7)
-#cfd = add_word_cond(cfd, train_data, 8)
-#cfd = add_word_cond(cfd, train_data, -8)
+cfd = add_word_cond(cfd, train_data, 3)
+cfd = add_word_cond(cfd, train_data, -3)
+
 
 
 # Instantiating Condition probability distribution to calculate the probabilities of the frequencies recorded above
@@ -134,7 +126,7 @@ cpd = ConditionalProbDist(cfd, LidstoneProbDist, 0.1)
 # storing the learned rules into the decision list
 for rule in cpd.conditions():
 
-    likelihood = calculate_log_likelihood(cpd, rule)
+    likelihood = log_likelihood(cpd, rule)
     decision_list.append([rule, likelihood, "phone" if likelihood > 0 else "product"])
     
     decision_list.sort(key=lambda rule: math.fabs(rule[1]), reverse=True)
