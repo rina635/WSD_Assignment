@@ -49,7 +49,10 @@ def process_text(text):
 def find_coll(n, context):
     ambg_index = context.index(ambg_word)
     n_word_index = ambg_index + n
-    return context[n_word_index] #indexes the context to get the word
+    if len(context) > n_word_index and n_word_index >=0:
+        return context[n_word_index] #indexes the context to get the word
+    else:
+        return ""
 
 
 # This function adds the new conditions based on collocation to the decision list
@@ -58,8 +61,8 @@ def write_cond(cfd, data, n):
         sense, context = element['sense'], element['text']
         n_word = find_coll(n, context)
         if n_word != '':
-            cond = 'Position: {}w {}'.format(n, n_word)
-            cfd[cond][sense] += 1
+            condition = str(n) + "_word_" + n_word
+            cfd[condition][sense] += 1
     return cfd
 
 
