@@ -9,14 +9,13 @@ Team 3 - Rafeef Baamer, Ashish Hingle, Rina Lidder, & Andy Nguyen
 '''
 
 
-
+#Import libraries
 import nltk, string, re, math, sys
 from nltk.probability import ConditionalFreqDist
 from nltk.probability import ConditionalProbDist
 from nltk.probability import LidstoneProbDist
 from nltk.corpus import stopwords
 from bs4 import BeautifulSoup
-from nltk.collocations import *
 
 
 # command line arguments for the file sources of training data, testing data, decision list
