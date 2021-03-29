@@ -137,9 +137,9 @@ for instance in soup.find_all('instance'):
 cfd = ConditionalFreqDist()
 for i in range (-3, 3):
     if i == 0:
+        i+=1
         continue
-    else:
-        cfd = add_word_cond(cfd, train_data, i)
+    cfd = add_word_cond(cfd, train_data, i)
         
         
 
