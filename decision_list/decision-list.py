@@ -124,14 +124,6 @@ for instance in soup.find_all('instance'):
     sntnc['text'] = process_text(text)
     train_data.append(sntnc)
 
-# Use conditional frequency distribution to add learned rules to the decision list
-#cfd = ConditionalFreqDist()
-#cfd = write_cond(cfd, train_data, 1)
-#cfd = write_cond(cfd, train_data, -1)
-#cfd = write_cond(cfd, train_data, 2)
-#cfd = write_cond(cfd, train_data, -2)
-#cfd = write_cond(cfd, train_data, 3)
-#cfd = write_cond(cfd, train_data, -3)
 
 # Use conditional frequency distribution to add learned rules to the decision list
 cfd = ConditionalFreqDist()
@@ -139,7 +131,7 @@ for i in range (-3, 3):
     if i == 0:
         i+=1
         continue
-    cfd = add_word_cond(cfd, train_data, i)
+    cfd = write_cond(cfd, train_data, i)
         
         
 
