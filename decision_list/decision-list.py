@@ -23,13 +23,15 @@ from nltk.probability import LidstoneProbDist
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from bs4 import BeautifulSoup
+import time
 
 
 # command line arguments for the file sources of training data, testing data, decision list
 training_data = sys.argv[1]
 testing_data = sys.argv[2]
 my_decision_list = sys.argv[3]
-
+#stores the current time of the request from user as the 'start time'
+start_time = time.time()
 # Ambiguous word
 ambg_word = "line"
 
@@ -187,7 +189,11 @@ for i in train_data:
 
 sensePercentage1 = (sense1/textLen)*100
 sensePercentage2 = (sense2/textLen)*100
-
+#Stores time it took for model to process input as 'stop time'    
+stop_time = time.time()
+#subtract the two time periods to calculate the runtime of the decision list
+#prints the elapsed time in the my-line-answers file
+print('Time elapsed:', round((stop_time - start_time),3), 'sec')
 
 # Calculating the majority sense
 majority_sense = "phone" if sense1 > sense2 else "product"
