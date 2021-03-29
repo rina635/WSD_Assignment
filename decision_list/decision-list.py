@@ -62,25 +62,36 @@ def process_text(unprocessed_text):
     
     return processed_text   # return the processed text to the method that called it
 
+#this function finds the index of the collocative word
+def find_index(context, word):
+    word_index = []
+    i = 0
+    while True:
+        try: 
+            i = context.index(word, i) + 1
+            word_index.append(i) 
+        except ValueError:
+            return word_index
+        
 
-# This function is to retrieve the collocative words to the ambigious word.
+# This function is to retrieve the collocative words based on n - # words away from ambigious word
 def find_coll(n, context):
-    ambg_index = context.index(ambg_word)
-    n_word_index = ambg_index + n
-    if len(context) > n_word_index and n_word_index >=0:
-        return context[n_word_index] #indexes the context to get the word
+    coll_word_index = find_index(context, ambg_word)
+    coll_word_index = coll_word_index[0]
+    if len(context) > coll_word_index and coll_word_index >=0:
+        return context[coll_word_index] #indexes the context to get collocative word
     else:
-        return ""
+        return "" #if n is out of bounds it will return a blank'  
 
 
 # This function adds the new conditions based on collocation to the decision list
 def write_cond(cfd, data, n):
     for element in data:
         sense, context = element['sense'], element['text']
-        n_word = find_coll(n, context)
-        if n_word != '':
-            condition = str(n) + "_word_" + n_word
-            cfd[condition][sense] += 1
+        coll_word = find_coll(n, context)
+        if coll_word != '':
+            condition = str(n) + "_word_" + coll_word
+            cfd[condition][sense] = cfd[condition][sense] + 1
     return cfd
 
 
@@ -174,7 +185,7 @@ for instance in test_soup('instance'):
      #   print("warning no match")
 
 # Calculating the frequencies percentage of each senses
-#If we just want to calculaye the frequency, we can use sense1 and sense2 and ignore sensePercentage
+
 
 sense1 = 0.0
 sense2 = 0.0
@@ -193,6 +204,7 @@ stop_time = time.time()
 #prints the elapsed time in the my-line-answers file
 print('Time elapsed:', round((stop_time - start_time),3), 'sec')
 
+#retreives percentage frequency of each sense.
 sensePercentage1 = round((sense1/textLen)*100,2)
 sensePercentage2 = round((sense2/textLen)*100,2)
 
