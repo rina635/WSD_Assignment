@@ -125,13 +125,23 @@ for instance in soup.find_all('instance'):
     train_data.append(sntnc)
 
 # Use conditional frequency distribution to add learned rules to the decision list
+#cfd = ConditionalFreqDist()
+#cfd = write_cond(cfd, train_data, 1)
+#cfd = write_cond(cfd, train_data, -1)
+#cfd = write_cond(cfd, train_data, 2)
+#cfd = write_cond(cfd, train_data, -2)
+#cfd = write_cond(cfd, train_data, 3)
+#cfd = write_cond(cfd, train_data, -3)
+
+# Use conditional frequency distribution to add learned rules to the decision list
 cfd = ConditionalFreqDist()
-cfd = write_cond(cfd, train_data, 1)
-cfd = write_cond(cfd, train_data, -1)
-cfd = write_cond(cfd, train_data, 2)
-cfd = write_cond(cfd, train_data, -2)
-cfd = write_cond(cfd, train_data, 3)
-cfd = write_cond(cfd, train_data, -3)
+for i in range (-3, 3):
+    if i == 0:
+        continue
+    else:
+        cfd = add_word_cond(cfd, train_data, i)
+        
+        
 
 # Instantiating Condition probability distribution to calculate the probabilities of the frequencies recorded above
 cpd = ConditionalProbDist(cfd, LidstoneProbDist, 0.1)
@@ -160,17 +170,35 @@ for instance in test_soup('instance'):
     test_data.append(sntnc)
 
 # Calculating the frequencies of each senses
-senseA, senseB = 0.0, 0.0
-for element in train_data:
-    if element['sense'] == "phone":
-        senseA += 1.0
-    elif element['sense'] == 'product':
-        senseB += 1.0
+#senseA, senseB = 0.0, 0.0
+#for element in train_data:
+ #   if element['sense'] == "phone":
+  #      senseA += 1.0
+   # elif element['sense'] == 'product':
+    #    senseB += 1.0
+    #else:
+     #   print("warning no match")
+
+# Calculating the frequencies percentage of each senses
+#If we just want to calculaye the frequency, we can use sense1 and sense2 and ignore sensePercentage
+
+sense1 = 0.0
+sense2 = 0.0
+textLen = len(train_data)
+for i in train_data:
+    if i['sense'] == "phone":
+        sense1 += 1.0
+    elif i['sense'] == 'product':
+        sense2 += 1.0
     else:
-        print("warning no match")
+        print("This word is not exist")
+
+sensePercentage1 = (sense1/textLen)*100
+sensePercentage2 = (sense2/textLen)*100
+
 
 # Calculating the majority sense
-majority_sense = "phone" if senseA > senseB else "product"
+majority_sense = "phone" if sense1 > sense2 else "product"
 
 # Performing the predictions
 predictions = []
