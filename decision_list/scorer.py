@@ -21,8 +21,20 @@ import sys
 my_key = sys.argv[1]
 gs_key = sys.argv[2]
 
-#function to search the strings and get keys, sense
-def get_senses(mylist):
+#This function is to search each line from the outputs to create a dictionary of
+#the sysnets and word sense. NEW FUNCTION**
+def all_word_senses(out_list):
+    sense = {}
+    keys = []
+    for line in out_list:
+        split_lines = re.split('"', line)
+        key = split_lines[1]
+        keys.append(key)
+        value = split_lines[3]
+        sense[key] = value
+    return sense, keys
+
+'''def get_senses(mylist):
     sense = {}
     keys = []
     for string in mylist:
@@ -31,18 +43,18 @@ def get_senses(mylist):
         keys.append(key)
         value = search.group(2)
         sense[key] = value
-    return sense, keys
+    return sense, keys'''
 
 
 
 #open the two files taken as input from command line and strip out '\n'
 with open(gs_key, 'r') as data:
     mylist1 = [line.rstrip('\n') for line in data]
-answers, keys = get_senses(mylist1)
+answers, keys = all_word_senses(mylist1)
 
 with open(my_key, 'r') as data:
     mylist2 = [line.rstrip('\n') for line in data]
-preds, keys = get_senses(mylist2)
+preds, keys = all_word_senses(mylist2)
 
 
 # For a specific key check if the values matches

@@ -199,17 +199,17 @@ for i in train_data:
         print("This word does not exist")
 
 #Stores time it took for model to process input as 'stop time'    
-stop_time = time.time()
+#stop_time = time.time()
 #subtract the two time periods to calculate the runtime of the decision list
 #prints the elapsed time in the my-line-answers file
-print('Time elapsed:', round((stop_time - start_time),3), 'sec')
+#print('Time elapsed:', round((stop_time - start_time),3), 'sec')
 
 #retreives percentage frequency of each sense.
 sensePercentage1 = round((sense1/textLen)*100,2)
 sensePercentage2 = round((sense2/textLen)*100,2)
 
-print(sensePercentage1, '% of instances of the word line is a phone')
-print(sensePercentage2, '% of instances of the word line is a product' + '\n')
+#print(sensePercentage1, '% of instances of the word line is a phone')
+#print(sensePercentage2, '% of instances of the word line is a product' + '\n')
       
 
 
