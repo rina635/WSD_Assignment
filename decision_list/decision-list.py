@@ -184,19 +184,18 @@ for instance in test_soup('instance'):
     #else:
      #   print("warning no match")
 
-# Calculating the frequencies percentage of each senses
-
-
-sense1 = 0.0
-sense2 = 0.0
+#Searches the training data to count the frequency of each sense.
+#Method adapted from #https://www.kite.com/python/answers/how-to-search-if-dictionary-value-contains-certain-string-in-python
+sense1 = 0
+sense2 = 0
 textLen = len(train_data)
-for i in train_data:
-    if i['sense'] == "phone":
-        sense1 += 1.0
-    elif i['sense'] == 'product':
-        sense2 += 1.0
+for i in range(0, len(train_data)):
+    if 'phone' in list(train_data[i].values()):
+        sense1 = sense1 + 1
+    elif 'product' in list(train_data[i].values()):
+        sense2 = sense2 + 1
     else:
-        print("This word does not exist")
+        print('The word does not exist.')
 
 #Stores time it took for model to process input as 'stop time'    
 #stop_time = time.time()
