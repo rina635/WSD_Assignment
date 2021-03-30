@@ -74,7 +74,7 @@ for key in keys:
     if(answers[key] == preds[key]):
         correct += 1
 correct
-'''
+
 #caluclated the most frequent sense baseline
 total = len(keys)
 baseline_count = 0
@@ -84,24 +84,37 @@ for key in keys:
 baseline_acc = round((baseline_count/total)*100,2)
 print("Baseline accuracy is "+str(baseline_acc)+"%") 
 
-'''
+
 # calucalate the accuracy after learning features
-accuracy = (float(correct)/float(total))*100
-print("Accuracy after adding learned features is "+str(accuracy)+"%")
-'''
+#accuracy = (float(correct)/float(total))*100
+print("Accuracy after adding learned features is "+str(accuracy)+"%")'''
+
+
+total = len(keys)
+baseline_count = 0
+for key in keys:
+    if(current_sense[key] == 'phone'):
+        baseline_count = baseline_count + 1
+baseline_acc = round((baseline_count/total)*100,2)
+print("Baseline accuracy is "+str(baseline_acc)+"%") 
+
 accuracy_output = print('Based on the collocative features extracted the accuracy is {}%'.format(accuracy_sense()))
 #creating array for our output and append the values to list
-'''pred_list = []
+
+'''
+pred_list = []
 for v in pred_sense:
     pred_list.append(pred_sense[v])'''
 #Access the dictionary to retreive the predicted senses to a list.    
-pred_list = list(pred_sense.values())
-#creating array for gold standard and append the values to its list
-'''answers_list = []
+
+#creating array for gold standard and append the values to its list'''
+
+answers_list = []
 for v in current_sense:
-    answers_list.append(current_sense[v])'''
+    answers_list.append(current_sense[v])
 #access the dicitionary values for the current senses into a list 
 #https://realpython.com/python-dicts/#dvalues   
+pred_list = list(pred_sense.values())
 answer_list = list(current_sense.values())
 # creating dataframes for both the files
 df1 = pd.Series( (v for v in pred_list) )
