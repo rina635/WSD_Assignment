@@ -74,16 +74,17 @@ for key in keys:
     if(answers[key] == preds[key]):
         correct += 1
 correct
-
+'''
 #caluclated the most frequent sense baseline
+total = len(keys)
 baseline_count = 0
 for key in keys:
-    if(answers[key] == 'phone'):
-        baseline_count += 1
-baseline_acc = (float(baseline_count)/float(total))*100
-print("Baseline accuracy is "+str(baseline_acc)+"%") - Do we need baseline?
+    if(current_sense[key] == 'phone'):
+        baseline_count = baseline_count + 1
+baseline_acc = round((baseline_count/total)*100,2)
+print("Baseline accuracy is "+str(baseline_acc)+"%") 
 
-
+'''
 # calucalate the accuracy after learning features
 accuracy = (float(correct)/float(total))*100
 print("Accuracy after adding learned features is "+str(accuracy)+"%")
