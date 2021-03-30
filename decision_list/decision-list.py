@@ -27,6 +27,8 @@ import time
 
 
 # command line arguments for the file sources of training data, testing data, decision list
+print(sys.argv[1])
+print(sys.argv[2])
 training_data = sys.argv[1]
 testing_data = sys.argv[2]
 my_decision_list = sys.argv[3]
@@ -123,19 +125,40 @@ def predict(context, majority_label):
     return (majority_label, context, "default")
 
 
-# Extracting the textual content from training data through XML parsing
-with open(training_data, 'r') as data:
-    soup = BeautifulSoup(data, 'html.parser')
-train_data = []
-for instance in soup.find_all('instance'):
-    sntnc = dict()
-    sntnc['id'] = instance['id']
-    sntnc['sense'] = instance.answer['senseid']
-    text = ""
-    for s in instance.find_all('s'):
-        text = text+ " "+ s.get_text()
-    sntnc['text'] = process_text(text)
-    train_data.append(sntnc)
+# Extract data from XML into a list
+def extract_training_data(file):
+    with open(file, 'r') as data:
+        soup_data = BeautifulSoup(data, 'html.parser')
+    extracted_data = []
+    for instance in soup_data.find_all('instance'):
+        sentence = dict()
+        sentence['id'] = instance['id']
+        sentence['sense'] = instance.answer['senseid']
+        text = ""
+        for s in instance.find_all('s'):
+            text = text + " "+ s.get_text()
+        sentence['text'] = process_text(text)
+        extracted_data.append(sentence)
+        
+    return extracted_data
+
+# Extract test data from XML into list
+def extract_test_data(file):
+    with open(file, 'r') as data:
+        soup_data = BeautifulSoup(data, 'html.parser')
+    extracted_data = []
+    for instance in soup_data.find_all('instance'):
+        sentence = dict()
+        sentence['id'] = instance['id']
+        text = ""
+        for s in instance.find_all('s'):
+            text = text + " "+ s.get_text()
+        sentence['text'] = process_text(text)
+        extracted_data.append(sentence)
+        
+    return extracted_data
+    
+train_data = extract_training_data(training_data)
 
 
 # Use conditional frequency distribution to add learned rules to the decision list
@@ -161,18 +184,20 @@ for rule in cpd.conditions():
 
 
 # extracting the test data through XML parsing
-with open(testing_data, 'r') as data:
-    test_soup = BeautifulSoup(data, 'html.parser')
+#with open(testing_data, 'r') as data:
+#    test_soup = BeautifulSoup(data, 'html.parser')
 
-test_data = []
-for instance in test_soup('instance'):
-    sntnc = dict()
-    sntnc['id'] = instance['id']
-    text = ""
-    for s in instance.find_all('s'):
-        text = text+ " "+ s.get_text()
-    sntnc['text'] = process_text(text)
-    test_data.append(sntnc)
+#test_data = []
+#for instance in test_soup('instance'):
+#    sntnc = dict()
+#    sntnc['id'] = instance['id']
+#    text = ""
+#    for s in instance.find_all('s'):
+#        text = text+ " "+ s.get_text()
+#    sntnc['text'] = process_text(text)
+#    test_data.append(sntnc)
+
+test_data = extract_test_data(testing_data)
 
 # Calculating the frequencies of each senses
 #senseA, senseB = 0.0, 0.0
