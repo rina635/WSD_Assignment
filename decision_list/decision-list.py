@@ -40,12 +40,36 @@ phone       53        6
 product     19       48
 
 First 10 results of my-decision-list:
-
+['Feature: -1 Word: telephone', 'Log-likelihood: 8.46', 'Sense: phone']
+['Feature: -1 Word: access', 'Log-likelihood: 7.24', 'Sense: phone']
+['Feature: -1 Word: car', 'Log-likelihood: -6.51', 'Sense: product']
+['Feature: -1 Word: end', 'Log-likelihood: 6.34', 'Sense: phone']
+['Feature: -1 Word: computer', 'Log-likelihood: -5.93', 'Sense: product']
+['Feature: -1 Word: came', 'Log-likelihood: 5.93', 'Sense: phone']
+['Feature: -1 Word: ps2', 'Log-likelihood: -5.93', 'Sense: product']
+['Feature: 1 Word: dead', 'Log-likelihood: 5.93', 'Sense: phone']
+['Feature: -2 Word: telephone', 'Log-likelihood: 5.67', 'Sense: phone']
+['Feature: -1 Word: gab', 'Log-likelihood: 5.67', 'Sense: phone']
 
 First 10 results my-line-answers.txt:
-
-
-
+<answer instance="line-n.w8_059:8174:" senseid="phone"/>
+<answer instance="line-n.w7_098:12684:" senseid="phone"/>
+<answer instance="line-n.w8_106:13309:" senseid="phone"/>
+<answer instance="line-n.w9_40:10187:" senseid="product"/>
+<answer instance="line-n.w9_16:217:" senseid="product"/>
+<answer instance="line-n.w8_119:16927:" senseid="product"/>
+<answer instance="line-n.w8_008:13756:" senseid="product"/>
+<answer instance="line-n.w8_041:15186:" senseid="phone"/>
+<answer instance="line-n.art7} aphb 05601797:" senseid="phone"/>
+<answer instance="line-n.w8_119:2964:" senseid="product"/>
+    
+Resources used for this assignment come from the materials provided in the AIT 590 course materials.
+- Lecture powerpoints (AIT 590)
+- Stanford University Prof. Dan Jurafsky's Video Lectures (https://www.youtube.com/watch?v=zQ6gzQ5YZ8o)
+- Joe James Python: NLTK video series (https://www.youtube.com/watch?v=RYgqWufzbA8)
+- w3schools Python Reference (https://www.w3schools.com/python/)
+- regular expressions 101 (https://regex101.com/)
+- dictionary search (https://www.kite.com/python/answers/how-to-search-if-dictionary-value-contains-certain-string-in-python)
 
 '''
 
@@ -59,18 +83,52 @@ from nltk.stem import PorterStemmer
 from bs4 import BeautifulSoup
 import time
 
-
 # command line arguments for the file sources of training data, testing data, decision list
 training_data = sys.argv[1]
 testing_data = sys.argv[2]
 my_decision_list = sys.argv[3]
+
 #stores the current time of the request from user as the 'start time'
 start_time = time.time()
+
 # Ambiguous word
 ambg_word = "line"
 
 # initializing the decision list to an empty list
 decision_list = []
+
+# Extract data from XML into a list
+def extract_training_data(file):
+    with open(file, 'r') as data:
+        soup_data = BeautifulSoup(data, 'html.parser')
+    extracted_data = []
+    for instance in soup_data.find_all('instance'):
+        sentence = dict()
+        sentence['id'] = instance['id']
+        sentence['sense'] = instance.answer['senseid']
+        text = ""
+        for s in instance.find_all('s'):
+            text = text + " "+ s.get_text()
+        sentence['text'] = process_text(text)
+        extracted_data.append(sentence)
+        
+    return extracted_data
+
+# Extract test data from XML into list
+def extract_test_data(file):
+    with open(file, 'r') as data:
+        soup_data = BeautifulSoup(data, 'html.parser')
+    extracted_data = []
+    for instance in soup_data.find_all('instance'):
+        sentence = dict()
+        sentence['id'] = instance['id']
+        text = ""
+        for s in instance.find_all('s'):
+            text = text + " "+ s.get_text()
+        sentence['text'] = process_text(text)
+        extracted_data.append(sentence)
+        
+    return extracted_data
 
 # Function to preprocess the text (lower case, remove stopword, stemming and remove html)
 def process_text(unprocessed_text):
@@ -119,7 +177,7 @@ def log_likelihood(cpd, rule):
     s1_prob = cpd[rule].prob("phone")
     s2_prob = cpd[rule].prob("product")
     if (s1_prob/s2_prob) != 0:
-        return round(math.log((s1_prob/s2_prob),2),3)
+        return round(math.log((s1_prob/s2_prob),2),2)
     else:
         return 0
 
@@ -140,41 +198,7 @@ def predict(context, majority_label):
                 return ("product", context, rule[0])
     return (majority_label, context, "default")
 
-
-# Extract data from XML into a list
-def extract_training_data(file):
-    with open(file, 'r') as data:
-        soup_data = BeautifulSoup(data, 'html.parser')
-    extracted_data = []
-    for instance in soup_data.find_all('instance'):
-        sentence = dict()
-        sentence['id'] = instance['id']
-        sentence['sense'] = instance.answer['senseid']
-        text = ""
-        for s in instance.find_all('s'):
-            text = text + " "+ s.get_text()
-        sentence['text'] = process_text(text)
-        extracted_data.append(sentence)
-        
-    return extracted_data
-
-# Extract test data from XML into list
-def extract_test_data(file):
-    with open(file, 'r') as data:
-        soup_data = BeautifulSoup(data, 'html.parser')
-    extracted_data = []
-    for instance in soup_data.find_all('instance'):
-        sentence = dict()
-        sentence['id'] = instance['id']
-        text = ""
-        for s in instance.find_all('s'):
-            text = text + " "+ s.get_text()
-        sentence['text'] = process_text(text)
-        extracted_data.append(sentence)
-        
-    return extracted_data
-
-#    
+# extract the training fata from the XML file   
 train_data = extract_training_data(training_data)
 
 # Use conditional frequency distribution to add learned rules to the decision list
@@ -216,21 +240,23 @@ sensePercentage2 = round((sense2/textLen)*100,2)
 # Calculating the majority sense
 majority_sense = "phone" if sense1 > sense2 else "product"
 
-# 
+# extract the test fata from the XML file
 test_data = extract_test_data(testing_data)
 
 # Performing the predictions
-predictions = []
 for element in test_data:
     pred, _, r = predict(element['text'], majority_sense)
     id1 = element['id']
-    predictions.append(f'<answer instance="{id1}" senseid="{pred}"/>')
     print(f'<answer instance="{id1}" senseid="{pred}"/>')
 
 # Storing the decision list into a file
 writer = open(my_decision_list, 'w')   # open the text file
 
-for i in decision_list:         # loop through the decision list and write it to file
+# loop through the decision list and write it to file with correct formatting
+for i in decision_list:         
+    i[0] = 'Feature: ' + i[0]                   # add 'Feature' text before printing feature 
+    i[1] = 'Log-likelihood: ' + str(i[1])       # add 'Log-likelihood' before printing float
+    i[2] = 'Sense: ' + i[2]                     # add 'Sense' before printing predicted sense
     writer.write('%s\n' % i)
 
 writer.close()      # close the text file

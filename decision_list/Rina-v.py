@@ -86,6 +86,10 @@ def extract_test_data(file):
 
 #This function extracts the collocative word for the ambigious word given n 
 #and writes our feature rule into the decision list
+<<<<<<< HEAD
+=======
+#Adapted from https://pythonexamples.org/python-find-index-of-item-in-list/
+>>>>>>> 21a599e1a262358334a74e342fb0ed6d55fec1fe
 def coll_rules(n, context, sense): #searches a LIST.
     coll_word_index = context.index(ambg_word) + n    #uses ambigious word's index to find the index of the collocative words
     if len(context) > coll_word_index and coll_word_index >= 0:
@@ -112,6 +116,10 @@ train_senses = train_df['sense']
        
 #Will execute for collocative words at -3 to 3 words away from the ambigious word
 #and add it to the decisions list
+<<<<<<< HEAD
+=======
+#adapted from https://stackoverflow.com/questions/24089924/skip-over-a-value-in-the-range-function-in-python
+>>>>>>> 21a599e1a262358334a74e342fb0ed6d55fec1fe
 for i in range (-3, 3):
     if i == 0:
         i = i + 1
@@ -138,6 +146,10 @@ decision_df = dec_df[['condition', 'sense']]
 #Converting the dataframe back to a list so that there's no seperation between n and the coll_word
 dec_list = decision_df.values.tolist()
 #Performing the conditional frequency for the decision list of rules.
+<<<<<<< HEAD
+=======
+#https://lost-contact.mit.edu/afs/cs.pitt.edu/projects/nltk/docs/tutorial/probability/conditionalfreqdist.html
+>>>>>>> 21a599e1a262358334a74e342fb0ed6d55fec1fe
 dec_cfd = nltk.ConditionalFreqDist(dec_list) 
 #use the conditional frequency variable alongise the ELEprobability to compute the cpd
 cpd = ConditionalProbDist(dec_cfd, LidstoneProbDist, 0.1)
