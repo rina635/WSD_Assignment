@@ -120,12 +120,6 @@ for i in range (-3, 3):
         continue
     change_coll(i)
 
-#Calculates the rule frequency
-#can delete if you want, not important really.
-rule_frequency = nltk.FreqDist(decision_list)
-
-#want to know if the condition - collocative word affects the outcome - sense id
-
 
 #https://stackoverflow.com/questions/15145172/nltk-conditionalfreqdist-to-pandas-dataframe
 #Convert the decision list into a dataframe
@@ -152,6 +146,8 @@ for condition in dec_cfd:
         #printing word - which is sense and its frequency, and then the condition.
 #https://stackoverflow.com/questions/62603854/conditional-frequency-distribution-using-browns-corpus-nltk-python
 table_cfd = dec_cfd.tabulate(condition, sense = ['phone','product'])
+df_cfdist = pd.DataFrame.from_dict(dec_cfd , orient='index')
+type(table_cfd)
 #first column is the condition, coll_word, and # time its used for sense1 (phone), 
 # and then 3rd column is times its used for sense2 (product)
 #Don't really need this table just did it to check it out.
@@ -160,10 +156,58 @@ from nltk.probability import ELEProbDist
 #https://lost-contact.mit.edu/afs/cs.pitt.edu/projects/nltk/docs/ref/nltk.probability.ELEProbDist.html
 
 cpdist = ConditionalProbDist(dec_cfd , ELEProbDist, 2)
-#prints the conditional probability of condition (booming when -3 words away from line has a sense of phone)
-cpdist['-3_words_booming'].prob('phone') #0.75 probability being phone
-cpdist['-3_words_booming'].prob('product') #0.25 probability being product
-cpdist['-3_words_booming'].max() #most likely that it will result in phone sense
+
+cond_list = []
+sense1_list  = []
+sense2_list = []
+for item in cpdist.conditions():
+    cond = item
+    phone_prob = cpdist[item].prob("phone")
+    prod_prob = cpdist[item].prob("product")
+    sense1_list.append(phone_prob)
+    sense2_list.append(prod_prob)
+    cond_list.append(cond)
+
+div_probs = [i / j for i, j in zip(sense1_list, sense2_list)]    
+log_likelihood = []
+for i in div_probs:
+    if i == 0:
+        log_likelihood.append(0)
+    else:
+        x = math.fabs(i)
+        x = math.log(x)
+        log_likelihood.append(x)
+
+sense_assign = []
+for item in log_likelihood:
+    if i >= 0:
+        sense = "phone"
+        sense_assign.append(sense)
+    else:
+        sense = "product"
+        sense_assign.append(sense)
 
 
+#Creates a list ccontaining a dictionary of the conditions, log likelihood, and
+#respective senses.
+def create_dict(n, j, s):
+    new_dic = []
+    for n, j, s in zip(cond_list, log_likelihood, sense_assign):
+        x = { 'condition': n, 'log_likelihood': j, 'sense': s }
+        new_dic.append(x)
+    return new_dic
 
+#Call the function to produce the kajsbfkabfkabf
+create_dict(cond_list, log_likelihood, sense_assign)
+#Needs to output file.
+
+#TEST DATA:
+test_data = extract_test_data(test_data) 
+
+#Grab df_cfdist - Replace NaN with 0s
+#Then perform collocation for test data need to edit formula used in training data
+#just need to use n and coll_word, no sense
+#Use the output of the rule "n_word_(CollocativeWord)" to match with our
+#conditional frequency dataframe (df_cfdist) 
+#If phone > product in data frame assign phone to that matching rule
+#@ 230 line of decision-line.py
