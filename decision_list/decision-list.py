@@ -247,7 +247,7 @@ test_data = extract_test_data(testing_data)
 for element in test_data:
     pred, _, r = predict(element['text'], majority_sense)
     id1 = element['id']
-    print(f'<answer instance="{id1}" senseid="{pred}"/>')
+    print(f'<id="{id1}" sense="{pred}"/>')
 
 # Storing the decision list into a file
 writer = open(my_decision_list, 'w')   # open the text file
