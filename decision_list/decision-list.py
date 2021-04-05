@@ -1,4 +1,6 @@
-'''
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
 AIT 590 - Assignment 3 
 Team 3 - Rafeef Baamer, Ashish Hingle, Rina Lidder, & Andy Nguyen
 Date: 3/31/2021
@@ -27,42 +29,41 @@ Step 5: Extract the testing data from XML files (preprocesses stopwords, punctua
 Step 6: Use majority sense to predict the test data
 Step 7: Store decision list into my-line-answers.txt file
 
-Additional features:  
-
+Additional features: 
 
 Results of confusion Matrix:
 Baseline accuracy: 57.14%
-Based on the collocative features extracted the accuracy is 80.16%
+Based on the collocative features extracted the accuracy is 74.6%
 Confusion matrix is
 col_0    phone  product
 row_0
-phone       53        6
-product     19       48
+phone       51       11
+product     21       43
 
 First 10 results of my-decision-list:
-['Feature: -1 Word: telephone', 'Log-likelihood: 8.46', 'Sense: phone']
-['Feature: -1 Word: access', 'Log-likelihood: 7.24', 'Sense: phone']
-['Feature: -1 Word: car', 'Log-likelihood: -6.51', 'Sense: product']
-['Feature: -1 Word: end', 'Log-likelihood: 6.34', 'Sense: phone']
-['Feature: -1 Word: computer', 'Log-likelihood: -5.93', 'Sense: product']
-['Feature: -1 Word: came', 'Log-likelihood: 5.93', 'Sense: phone']
-['Feature: -1 Word: ps2', 'Log-likelihood: -5.93', 'Sense: product']
-['Feature: 1 Word: dead', 'Log-likelihood: 5.93', 'Sense: phone']
-['Feature: -2 Word: telephone', 'Log-likelihood: 5.67', 'Sense: phone']
-['Feature: -1 Word: gab', 'Log-likelihood: 5.67', 'Sense: phone']
+{'condition': '-3_words_booming', 'log_likelihood': 1.0986122886681098, 'sense': 'phone'}
+{'condition': '-3_words_ibm', 'log_likelihood': -1.9459101490553135, 'sense': 'phone'}
+{'condition': '-3_words_kraft', 'log_likelihood': -1.0986122886681098, 'sense': 'phone'}
+{'condition': '-3_words_sold', 'log_likelihood': 1.0986122886681098, 'sense': 'phone'}
+{'condition': '-3_words_powerful', 'log_likelihood': -1.0986122886681098, 'sense': 'phone'}
+{'condition': '-3_words_ps2', 'log_likelihood': -1.0986122886681098, 'sense': 'phone'}
+{'condition': '-3_words_total', 'log_likelihood': 0.0, 'sense': 'phone'}
+{'condition': '-3_words_la', 'log_likelihood': -1.0986122886681098, 'sense': 'phone'}
+{'condition': '-3_words_selling', 'log_likelihood': -1.6094379124341005, 'sense': 'phone'}
+{'condition': '-3_words_5%', 'log_likelihood': 1.0986122886681098, 'sense': 'phone'}
 
 First 10 results my-line-answers.txt:
-<answer instance="line-n.w8_059:8174:" senseid="phone"/>
-<answer instance="line-n.w7_098:12684:" senseid="phone"/>
-<answer instance="line-n.w8_106:13309:" senseid="phone"/>
-<answer instance="line-n.w9_40:10187:" senseid="product"/>
-<answer instance="line-n.w9_16:217:" senseid="product"/>
-<answer instance="line-n.w8_119:16927:" senseid="product"/>
-<answer instance="line-n.w8_008:13756:" senseid="product"/>
-<answer instance="line-n.w8_041:15186:" senseid="phone"/>
-<answer instance="line-n.art7} aphb 05601797:" senseid="phone"/>
-<answer instance="line-n.w8_119:2964:" senseid="product"/>
-    
+<id="line-n.w8_059:8174:" sense="phone"/>
+<id="line-n.w7_098:12684:" sense="phone"/>
+<id="line-n.w8_106:13309:" sense="phone"/>
+<id="line-n.w9_40:10187:" sense="product"/>
+<id="line-n.w9_16:217:" sense="product"/>
+<id="line-n.w8_119:16927:" sense="product"/>
+<id="line-n.w8_008:13756:" sense="product"/>
+<id="line-n.w8_041:15186:" sense="phone"/>
+<id="line-n.art7} aphb 05601797:" sense="phone"/>
+<id="line-n.w8_119:2964:" sense="product"/>
+
 Resources used for this assignment come from the materials provided in the AIT 590 course materials.
 - Lecture powerpoints (AIT 590)
 - Stanford University Prof. Dan Jurafsky's Video Lectures (https://www.youtube.com/watch?v=zQ6gzQ5YZ8o)
@@ -70,32 +71,52 @@ Resources used for this assignment come from the materials provided in the AIT 5
 - w3schools Python Reference (https://www.w3schools.com/python/)
 - regular expressions 101 (https://regex101.com/)
 - dictionary search (https://www.kite.com/python/answers/how-to-search-if-dictionary-value-contains-certain-string-in-python)
-
-'''
-
-#Import libraries
+"""
 import nltk, string, re, math, sys
 from nltk.probability import ConditionalFreqDist
 from nltk.probability import ConditionalProbDist
 from nltk.probability import LidstoneProbDist
+from nltk.probability import ELEProbDist
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from bs4 import BeautifulSoup
-import time
+import pandas as pd
 
 # command line arguments for the file sources of training data, testing data, decision list
 training_data = sys.argv[1]
 testing_data = sys.argv[2]
 my_decision_list = sys.argv[3]
 
-#stores the current time of the request from user as the 'start time'
-start_time = time.time()
-
 # Ambiguous word
 ambg_word = "line"
 
 # initializing the decision list to an empty list
 decision_list = []
+
+# Function to preprocess the text (lower case, remove stopword, stemming and remove html)
+def process_text(unprocessed_text):
+    # lower case all unprocessed text
+    unprocessed_text = unprocessed_text.lower()
+
+    # save stopwords into a variable for removal
+    sw_p = stopwords.words("english")
+    
+    # save punctuation symbols into the variable for removal 
+    sw_p.extend(string.punctuation)
+    
+    # stem and replace other forms of the root word in the text for consistency
+    ps = PorterStemmer()   # create a PorterStemmer class
+    other_forms = 'lines'   # indicate other forms of the root word   
+    unprocessed_text = unprocessed_text.replace(other_forms, ps.stem(other_forms))   # convert lines to line using the stemmed root word
+    
+    # remove sumbols that due to html tags
+    processed_text = [re.sub(r'[\.\,\?\!\'\"\-\_/]','',w) for w in unprocessed_text.split(" ")]
+    
+    # remove stopwords and punctuation 
+    processed_text = [w for w in processed_text if w not in sw_p and w != '']
+    
+    return processed_text   # return the processed text to the method that called it
+
 
 # Extract data from XML into a list
 def extract_training_data(file):
@@ -130,96 +151,145 @@ def extract_test_data(file):
         
     return extracted_data
 
-# Function to preprocess the text (lower case, remove stopword, stemming and remove html)
-def process_text(unprocessed_text):
-    # lower case all unprocessed text
-    unprocessed_text = unprocessed_text.lower()
 
-    # save stopwords into a variable for removal
-    sw_p = stopwords.words("english")
+#This function extracts the collocative word for the ambigious word given n 
+#and writes our feature rule into the decision list
+#Adapted from https://pythonexamples.org/python-find-index-of-item-in-list/
+def coll_rules(n, context, sense): #searches a LIST.
+    coll_word_index = context.index(ambg_word) + n    #uses ambigious word's index to find the index of the collocative words
+    if len(context) > coll_word_index and coll_word_index >= 0:
+        rule = (str(n) + "_words_", context[coll_word_index], sense) #the rule is n words followed by the collocative word and the respective sense
+        decision_list.append(rule) #adds the rule into the decision list initialized at the beginning.
+    else:
+        return ""
+#Based on input n (# of words away from ambigious word) iterates through all
+#the context sentences and senses in the training dataset to grab the collocative words
+#with the respective senses
+def change_coll(n):
+    for i in range(0, len(train_context)):
+        coll_rules(n, train_context[i], train_senses[i])
+        
+#Creates a list ccontaining a dictionary of the conditions, log likelihood, and
+#respective senses.
+def create_dict(n, j, s):
+    new_dic = []
+    for n, j, s in zip(cond_list, log_likelihood, sense_assign):
+        x = { 'condition': n, 'log_likelihood': j, 'sense': s }
+        new_dic.append(x)
+    return new_dic
     
-    # save punctuation symbols into the variable for removal 
-    sw_p.extend(string.punctuation)
+# Function to check whether or not the rule applies to the given prediction
+def check_rule(context, rule):
+    rule_scope, rule_type, rule_feature = rule.split("_")
+    rule_scope = int(rule_scope)
     
-    # stem and replace other forms of the root word in the text for consistency
-    ps = PorterStemmer()   # create a PorterStemmer class
-    other_forms = 'lines'   # indicate other forms of the root word   
-    unprocessed_text = unprocessed_text.replace(other_forms, ps.stem(other_forms))   # convert lines to line using the stemmed root word
-    
-    # remove sumbols that due to html tags
-    processed_text = [re.sub(r'[\.\,\?\!\'\"\-\_/]','',w) for w in unprocessed_text.split(" ")]
-    
-    # remove stopwords and punctuation 
-    processed_text = [w for w in processed_text if w not in sw_p and w != '']
-    
-    return processed_text   # return the processed text to the method that called it
+    return find_coll(rule_scope, context) == rule_feature
 
-# this function finds the index of the collocative word
+# Finds the index of the given word
 def find_coll(n, context):
     n_word_index = context.index(ambg_word) + n    
     if len(context) > n_word_index and n_word_index >= 0:
         return context[n_word_index]
     else:
         return ""
-
-# This function adds the new conditions based on collocation to the decision list
-def write_cond(cfd, data, n):
-    for element in data:
-        sense, context = element['sense'], element['text']
-        coll_word = find_coll(n, context)
-        if coll_word != '':
-            condition = str(n) + " Word: " + coll_word
-            cfd[condition][sense] = cfd[condition][sense] + 1
-    return cfd
-
-# To calculate the logarithm of likelihood for ratio of sense probabilities
-def log_likelihood(cpd, rule):
-    s1_prob = cpd[rule].prob("phone")
-    s2_prob = cpd[rule].prob("product")
-    if (s1_prob/s2_prob) != 0:
-        return round(math.log((s1_prob/s2_prob),2),2)
-    else:
-        return 0
-
-# checking whether the rule is satisfied in a given context
-def check_rule(context, rule):
-    rule_scope, rule_type, rule_feature = rule.split(" ")
-    rule_scope = int(rule_scope)
-    
-    return find_coll(rule_scope, context) == rule_feature
         
 # Function to predict the sense on test data
 def predict(context, majority_label):
-    for rule in decision_list:
-        if check_rule(context, rule[0]):
-            if rule[1] > 0:
-                return ("phone", context, rule[0])
-            elif rule[1] < 0:
-                return ("product", context, rule[0])
+    for rule in decision_dict:
+        if check_rule(context, list(rule.values())[0]):
+            if rule.get(list(rule)[1]) > 0:
+                return ("phone", context, rule.get(list(rule)[0]))
+            elif rule.get(list(rule)[1]) < 0:
+                return ("product", context, rule.get(list(rule)[0]))
     return (majority_label, context, "default")
-
-# extract the training fata from the XML file   
-train_data = extract_training_data(training_data)
-
-# Use conditional frequency distribution to add learned rules to the decision list
-cfd = ConditionalFreqDist()
+        
+        
+#Extracts the training data as a list       
+train_data = extract_training_data(training_data)    
+#Convert the training data into a dataframe
+train_df = pd.DataFrame(train_data)    
+#Creates a smaller dataframe of just the context
+train_context = train_df['text']
+#Creates a smaller dataframe of just the senses
+train_senses = train_df['sense']
+       
+#Will execute for collocative words at -3 to 3 words away from the ambigious word
+#and add it to the decisions list
+#adapted from https://stackoverflow.com/questions/24089924/skip-over-a-value-in-the-range-function-in-python
 for i in range (-3, 3):
     if i == 0:
-        i+=1
+        i = i + 1
         continue
-    cfd = write_cond(cfd, train_data, i)
+    change_coll(i)
+
+
+#https://stackoverflow.com/questions/15145172/nltk-conditionalfreqdist-to-pandas-dataframe
+#Convert the decision list into a dataframe
+dec_df = pd.DataFrame(decision_list) 
+#Renames the columns for readability
+dec_df.columns = ['w', 'coll', 'sense']
+#Want the condition to be the collocative location and the word so combining them into one column
+dec_df["condition"] = dec_df["w"] + dec_df["coll"]
+#The new dataframe will have just the 2 columns.
+decision_df = dec_df[['condition', 'sense']]
+
+#Converting the dataframe back to a list so that there's no seperation between n and the coll_word
+dec_list = decision_df.values.tolist()
+#Performing the conditional frequency for the decision list of rules.
+#https://lost-contact.mit.edu/afs/cs.pitt.edu/projects/nltk/docs/tutorial/probability/conditionalfreqdist.html
+dec_cfd = nltk.ConditionalFreqDist(dec_list) 
+#use the conditional frequency variable alongise the ELEprobability to compute the cpd
+cpd = ConditionalProbDist(dec_cfd, LidstoneProbDist, 0.1)
+
+#to see some of the conditions - Will delete later just for viewing.
+#for condition in dec_cfd:
+#    for word in dec_cfd[condition]:
+#        print (word, dec_cfd[condition].freq(word), condition)
+        #printing word - which is sense and its frequency, and then the condition.
+#https://stackoverflow.com/questions/62603854/conditional-frequency-distribution-using-browns-corpus-nltk-python
+#table_cfd = dec_cfd.tabulate(condition, sense = ['phone','product'])
+df_cfdist = pd.DataFrame.from_dict(dec_cfd , orient='index')
+#type(table_cfd)
+#first column is the condition, coll_word, and # time its used for sense1 (phone), 
+# and then 3rd column is times its used for sense2 (product)
+#Don't really need this table just did it to check it out.
+#https://www.kite.com/python/docs/nltk.ConditionalProbDist
+#https://lost-contact.mit.edu/afs/cs.pitt.edu/projects/nltk/docs/ref/nltk.probability.ELEProbDist.html
+
+cpdist = ConditionalProbDist(dec_cfd , ELEProbDist, 2)
+
+cond_list = []
+sense1_list  = []
+sense2_list = []
+for item in cpdist.conditions():
+    cond = item
+    phone_prob = cpdist[item].prob("phone")
+    prod_prob = cpdist[item].prob("product")
+    sense1_list.append(phone_prob)
+    sense2_list.append(prod_prob)
+    cond_list.append(cond)
+
+div_probs = [i / j for i, j in zip(sense1_list, sense2_list)]    
+log_likelihood = []
+for i in div_probs:
+    if i == 0:
+        log_likelihood.append(0)
+    else:
+        x = math.fabs(i)
+        x = math.log(x)
+        log_likelihood.append(x)
+
+sense_assign = []
+for item in log_likelihood:
+    if i >= 0:
+        sense = "phone"
+        sense_assign.append(sense)
+    else:
+        sense = "product"
+        sense_assign.append(sense)
         
-# Instantiating Condition probability distribution to calculate the probabilities of the frequencies recorded above
-cpd = ConditionalProbDist(cfd, LidstoneProbDist, 0.1)
-
-# storing the learned rules into the decision list
-for rule in cpd.conditions():
-
-    likelihood = log_likelihood(cpd, rule)
-    decision_list.append([rule, likelihood, "phone" if likelihood > 0 else "product"])
-    
-    decision_list.sort(key=lambda rule: math.fabs(rule[1]), reverse=True)
-
+# extract the training data from the XML file   
+train_data = extract_training_data(training_data)
 #Searches the training data to count the frequency of each sense.
 #Method adapted from #https://www.kite.com/python/answers/how-to-search-if-dictionary-value-contains-certain-string-in-python
 sense1 = 0
@@ -240,10 +310,13 @@ sensePercentage2 = round((sense2/textLen)*100,2)
 # Calculating the majority sense
 majority_sense = "phone" if sense1 > sense2 else "product"
 
-# extract the test fata from the XML file
+#Call the function to produce the kajsbfkabfkabf
+decision_dict = create_dict(cond_list, log_likelihood, sense_assign)
+#Needs to output file.
+
+#TEST DATA:
 test_data = extract_test_data(testing_data)
 
-# Performing the predictions
 for element in test_data:
     pred, _, r = predict(element['text'], majority_sense)
     id1 = element['id']
@@ -253,10 +326,7 @@ for element in test_data:
 writer = open(my_decision_list, 'w')   # open the text file
 
 # loop through the decision list and write it to file with correct formatting
-for i in decision_list:         
-    i[0] = 'Feature: ' + i[0]                   # add 'Feature' text before printing feature 
-    i[1] = 'Log-likelihood: ' + str(i[1])       # add 'Log-likelihood' before printing float
-    i[2] = 'Sense: ' + i[2]                     # add 'Sense' before printing predicted sense
+for i in decision_dict:         
     writer.write('%s\n' % i)
 
 writer.close()      # close the text file
