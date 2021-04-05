@@ -32,25 +32,26 @@ Step 7: Store decision list into my-line-answers.txt file
 Additional features: 
 
 Results of confusion Matrix:
-Baseline accuracy: 57.14%
-Based on the collocative features extracted the accuracy is 74.6%
+Baseline Accuracy: 57.14%
+Overall Accuracy: 74.6%
 Confusion matrix is
 col_0    phone  product
 row_0
 phone       51       11
 product     21       43
 
+
 First 10 results of my-decision-list:
-{'condition': '-3_words_booming', 'log_likelihood': 1.0986122886681098, 'sense': 'phone'}
-{'condition': '-3_words_ibm', 'log_likelihood': -1.9459101490553135, 'sense': 'phone'}
-{'condition': '-3_words_kraft', 'log_likelihood': -1.0986122886681098, 'sense': 'phone'}
-{'condition': '-3_words_sold', 'log_likelihood': 1.0986122886681098, 'sense': 'phone'}
-{'condition': '-3_words_powerful', 'log_likelihood': -1.0986122886681098, 'sense': 'phone'}
-{'condition': '-3_words_ps2', 'log_likelihood': -1.0986122886681098, 'sense': 'phone'}
-{'condition': '-3_words_total', 'log_likelihood': 0.0, 'sense': 'phone'}
-{'condition': '-3_words_la', 'log_likelihood': -1.0986122886681098, 'sense': 'phone'}
-{'condition': '-3_words_selling', 'log_likelihood': -1.6094379124341005, 'sense': 'phone'}
-{'condition': '-3_words_5%', 'log_likelihood': 1.0986122886681098, 'sense': 'phone'}
+{'condition': '-1_words_telephone', 'log_likelihood': 4.2626798770413155, 'sense': 'phone'}
+{'condition': '-1_words_access', 'log_likelihood': 3.4339872044851463, 'sense': 'phone'}
+{'condition': '-1_words_car', 'log_likelihood': -2.9444389791664403, 'sense': 'product'}
+{'condition': '-1_words_end', 'log_likelihood': 2.833213344056216, 'sense': 'phone'}
+{'condition': '-1_words_computer', 'log_likelihood': -2.5649493574615367, 'sense': 'product'}
+{'condition': '-1_words_came', 'log_likelihood': 2.5649493574615367, 'sense': 'phone'}
+{'condition': '-1_words_ps2', 'log_likelihood': -2.5649493574615367, 'sense': 'product'}
+{'condition': '1_words_dead', 'log_likelihood': 2.5649493574615367, 'sense': 'phone'}
+{'condition': '-2_words_telephone', 'log_likelihood': 2.3978952727983707, 'sense': 'phone'}
+{'condition': '-1_words_gab', 'log_likelihood': 2.3978952727983707, 'sense': 'phone'}
 
 First 10 results my-line-answers.txt:
 <id="line-n.w8_059:8174:" sense="phone"/>
@@ -71,12 +72,10 @@ Resources used for this assignment come from the materials provided in the AIT 5
 - w3schools Python Reference (https://www.w3schools.com/python/)
 - regular expressions 101 (https://regex101.com/)
 - dictionary search (https://www.kite.com/python/answers/how-to-search-if-dictionary-value-contains-certain-string-in-python)
+- sorting dictionary using lambda https://stackoverflow.com/questions/72899/how-do-i-sort-a-list-of-dictionaries-by-a-value-of-the-dictionary
 """
 import nltk, string, re, math, sys
-from nltk.probability import ConditionalFreqDist
-from nltk.probability import ConditionalProbDist
-from nltk.probability import LidstoneProbDist
-from nltk.probability import ELEProbDist
+from nltk.probability import ConditionalFreqDist, ConditionalProbDist, ELEProbDist
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from bs4 import BeautifulSoup
@@ -178,32 +177,33 @@ def create_dict(n, j, s):
         new_dic.append(x)
     return new_dic
     
-# Function to check whether or not the rule applies to the given prediction
-def check_rule(context, rule):
-    rule_scope, rule_type, rule_feature = rule.split("_")
-    rule_scope = int(rule_scope)
+# Find the index for the given rule
+def find_index(context, rule):
+    delimiter = rule.split("_")
+    rule_index = int(delimiter[0])
     
-    return find_coll(rule_scope, context) == rule_feature
+    return find_coll(rule_index, context) == delimiter[2]
 
-# Finds the index of the given word
-def find_coll(n, context):
-    n_word_index = context.index(ambg_word) + n    
-    if len(context) > n_word_index and n_word_index >= 0:
-        return context[n_word_index]
+# Finds the word at the given index
+def find_coll(coll, context):
+    coll_word_index = context.index(ambg_word) + coll    
+    if len(context) > coll_word_index and coll_word_index >= 0:
+        return context[coll_word_index]
     else:
         return ""
         
-# Function to predict the sense on test data
-def predict(context, majority_label):
-    for rule in decision_dict:
-        if check_rule(context, list(rule.values())[0]):
+# Function to determine sense on given context
+def determine_sense(most_likely_sense, context):
+    for rule in dec_list:
+        if find_index(context, list(rule.values())[0]):
             if rule.get(list(rule)[1]) > 0:
                 return ("phone", context, rule.get(list(rule)[0]))
             elif rule.get(list(rule)[1]) < 0:
                 return ("product", context, rule.get(list(rule)[0]))
-    return (majority_label, context, "default")
+    return (most_likely_sense, context, "default")
         
-        
+
+# Step 1        
 #Extracts the training data as a list       
 train_data = extract_training_data(training_data)    
 #Convert the training data into a dataframe
@@ -222,7 +222,7 @@ for i in range (-3, 3):
         continue
     change_coll(i)
 
-
+# Step 2
 #https://stackoverflow.com/questions/15145172/nltk-conditionalfreqdist-to-pandas-dataframe
 #Convert the decision list into a dataframe
 dec_df = pd.DataFrame(decision_list) 
@@ -238,26 +238,18 @@ dec_list = decision_df.values.tolist()
 #Performing the conditional frequency for the decision list of rules.
 #https://lost-contact.mit.edu/afs/cs.pitt.edu/projects/nltk/docs/tutorial/probability/conditionalfreqdist.html
 dec_cfd = nltk.ConditionalFreqDist(dec_list) 
-#use the conditional frequency variable alongise the ELEprobability to compute the cpd
-cpd = ConditionalProbDist(dec_cfd, LidstoneProbDist, 0.1)
 
-#to see some of the conditions - Will delete later just for viewing.
-#for condition in dec_cfd:
-#    for word in dec_cfd[condition]:
-#        print (word, dec_cfd[condition].freq(word), condition)
-        #printing word - which is sense and its frequency, and then the condition.
 #https://stackoverflow.com/questions/62603854/conditional-frequency-distribution-using-browns-corpus-nltk-python
-#table_cfd = dec_cfd.tabulate(condition, sense = ['phone','product'])
+# Creating dataframe of conditional frequency
 df_cfdist = pd.DataFrame.from_dict(dec_cfd , orient='index')
-#type(table_cfd)
-#first column is the condition, coll_word, and # time its used for sense1 (phone), 
-# and then 3rd column is times its used for sense2 (product)
-#Don't really need this table just did it to check it out.
+
 #https://www.kite.com/python/docs/nltk.ConditionalProbDist
 #https://lost-contact.mit.edu/afs/cs.pitt.edu/projects/nltk/docs/ref/nltk.probability.ELEProbDist.html
 
 cpdist = ConditionalProbDist(dec_cfd , ELEProbDist, 2)
 
+# Creating sense list
+# Grabbing cpdist values of the senses and the conditions and storing it in a separate list
 cond_list = []
 sense1_list  = []
 sense2_list = []
@@ -269,27 +261,34 @@ for item in cpdist.conditions():
     sense2_list.append(prod_prob)
     cond_list.append(cond)
 
+# Calculating log likelihood
+# Loops through the conditional probabilities of each sense and divides them
 div_probs = [i / j for i, j in zip(sense1_list, sense2_list)]    
 log_likelihood = []
+# Takes the log and absolute value of previous values to calculate the log likelihood
 for i in div_probs:
     if i == 0:
         log_likelihood.append(0)
     else:
         x = math.fabs(i)
         x = math.log(x)
+        x = round(x, 2)
         log_likelihood.append(x)
 
+# Assigning sense to each condition
 sense_assign = []
 for item in log_likelihood:
-    if i >= 0:
+    if item >= 0:
         sense = "phone"
         sense_assign.append(sense)
     else:
         sense = "product"
         sense_assign.append(sense)
-        
+
+# Step 3      
 # extract the training data from the XML file   
 train_data = extract_training_data(training_data)
+
 #Searches the training data to count the frequency of each sense.
 #Method adapted from #https://www.kite.com/python/answers/how-to-search-if-dictionary-value-contains-certain-string-in-python
 sense1 = 0
@@ -300,33 +299,34 @@ for i in range(0, len(train_data)):
         sense1 = sense1 + 1
     elif 'product' in list(train_data[i].values()):
         sense2 = sense2 + 1
-    else:
-        print('The word does not exist.')
 
-#retreives percentage frequency of each sense.
-sensePercentage1 = round((sense1/textLen)*100,2)
-sensePercentage2 = round((sense2/textLen)*100,2)
+# Step 4
+# Calculating which sense occurs most often
+most_likely_sense = "phone" if sense1 > sense2 else "product"
 
-# Calculating the majority sense
-majority_sense = "phone" if sense1 > sense2 else "product"
+# Creating the decision dictionary with the condition, log likelihood, and sense
+dec_list = create_dict(cond_list, log_likelihood, sense_assign)
 
-#Call the function to produce the kajsbfkabfkabf
-decision_dict = create_dict(cond_list, log_likelihood, sense_assign)
-#Needs to output file.
+# Sorting decision dictionary in reverse
+sorted_dec_list = sorted(dec_list, key=lambda k: math.fabs(k['log_likelihood']), reverse=True)
 
-#TEST DATA:
+# Step 5
+# Extract testing data into list
 test_data = extract_test_data(testing_data)
 
+# Step 6
+# Performing prediction on testing data
 for element in test_data:
-    pred, _, r = predict(element['text'], majority_sense)
+    pred = determine_sense(most_likely_sense, element['text'])
     id1 = element['id']
-    print(f'<id="{id1}" sense="{pred}"/>')
+    print(f'<answer instance="{id1}" senseid="{pred[0]}"/>')
 
+# Step 7
 # Storing the decision list into a file
 writer = open(my_decision_list, 'w')   # open the text file
 
 # loop through the decision list and write it to file with correct formatting
-for i in decision_dict:         
+for i in sorted_dec_list:         
     writer.write('%s\n' % i)
 
-writer.close()      # close the text file
+writer.close()

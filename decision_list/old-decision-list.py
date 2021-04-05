@@ -32,12 +32,12 @@ Additional features:
 
 Results of confusion Matrix:
 Baseline accuracy: 57.14%
-Based on the collocative features extracted the accuracy is 80.16%
+Based on the collocative features extracted the accuracy is 74.6%
 Confusion matrix is
 col_0    phone  product
 row_0
-phone       53        6
-product     19       48
+phone       51       11
+product     21       43
 
 First 10 results of my-decision-list:
 ['Feature: -1 Word: telephone', 'Log-likelihood: 8.46', 'Sense: phone']
