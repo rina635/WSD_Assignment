@@ -10,7 +10,7 @@ Libraries used: RE, SYS, PANDAS
 
 Usage Instructions: This program must be used in combination with the scorer.py program. To use the program:
 1) Ensure all supplmentary files are placed in the correct directory
-2) In the terminal, run the command "python scorer.pl my-line-answers.txt line-answers.txt"
+2) In the terminal, run the command "python scorer.py my-line-answers.txt line-answers.txt" or "python scorer.py my-line-answers.txt line-answers.txt line-text.xml"
 	a) scorer.py -> this file
 	b) my-line-answers.txt -> generated file from decision-list.py
 	c) line-answers.txt -> baseline file with ansers for each sense
@@ -64,7 +64,6 @@ import string, time
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from bs4 import BeautifulSoup
-
 
 #The command line arguments to run the scorer using the results obtained from decision-list.py (generated_file)
 #and the gold standard "key" data (key_file)
@@ -158,8 +157,6 @@ def extract_test_data(file):
         
     return extracted_data
 
-#Gathers the two files from command line, strips the '\n' and creates dictionaries
-
 #Key value for gold standard key data is: Key and Correct_sense
 with open(key_file, 'r') as data:
     mylist1 = [line.rstrip('\n') for line in data]
@@ -182,7 +179,6 @@ print("Baseline Accuracy: "+str(baseline_acc)+"%")
 #Prints the accuracy output in the command line.
 accuracy_output = print('Overall Accuracy: {}%\n'.format(accuracy_sense()))
 
-
 #access the dicitionary values for the predicted sense and correct senses into a list 
 #https://realpython.com/python-dicts/#dvalues   
 pred_list = list(pred_sense.values())
@@ -198,26 +194,20 @@ print("Confusion matrix:\n"  +str(df_confusion))
 
 # Extract testing data into list
 test_data = extract_test_data(testing_data)
-#print(test_data)
 
-#for element in test_data:
-#    id1 = element['id']
-#    text = element['text']
-
+# creating a list of incorrect senses based on predicitons
 incorrect_senses = []   
 for key in keys:
     if correct_sense[key] != pred_sense[key]:
         incorrect_senses.append(key)
 
+# printing incorrect sense predictions with corresponding context
 incorrect_context = []
 for context in test_data:
     id1 = context["id"]
     if id1 in incorrect_senses:
         print("ID: " + str(context["id"]))
         print("Text: " + str(context["text"]))
-#for key in keys:
-#    if(current_sense[key]) != pred_sense[key]:
-#        print(current_sense[key])
 
 stop_time = time.time()
 #subtract the two time periods to calculate the runtime of the scorer:
