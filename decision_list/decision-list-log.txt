@@ -174,6 +174,16 @@
 {'condition': '2_words_line', 'log_likelihood': 1.95, 'sense': 'phone'}
 {'condition': '2_words_dead', 'log_likelihood': 1.95, 'sense': 'phone'}
 {'condition': '-1_words_new', 'log_likelihood': -1.85, 'sense': 'product'}
+<answer instance="line-n.w8_059:8174:" senseid="phone"/>
+<answer instance="line-n.w7_098:12684:" senseid="phone"/>
+<answer instance="line-n.w8_106:13309:" senseid="phone"/>
+<answer instance="line-n.w9_40:10187:" senseid="product"/>
+<answer instance="line-n.w9_16:217:" senseid="product"/>
+<answer instance="line-n.w8_119:16927:" senseid="product"/>
+<answer instance="line-n.w8_008:13756:" senseid="product"/>
+<answer instance="line-n.w8_041:15186:" senseid="phone"/>
+<answer instance="line-n.art7} aphb 05601797:" senseid="phone"/>
+<answer instance="line-n.w8_119:2964:" senseid="product"/>
 Baseline Accuracy: 57.14%
 Overall Accuracy: 74.6%
 
@@ -182,6 +192,8 @@ col_0    phone  product
 row_0                  
 phone       51       11
 product     21       43
+
+Below listed are the incorrectly classified senses and their contents:
 ID: line-n.w9_40:10187:
 Text: ['callers', 'invited', 'play', 'interactive', 'games', 'movies', 'characters', 'enter', 'sweepstakes', 'course', 'run', 'dont', 'walk', 'nearest', 'theater', 'toll', 'telephone', 'services', 'mostly', 'stuff', 'pornography', 'line', 'childrens', 'horrorstory', 'santa', 'claus', 'line', 'movie', 'marketers', 'hope', 'use', 'line', 'entice', 'potential', 'moviegoers', 'especially', 'teenagers', 'young', 'adults']
 ID: line-n.w9_16:217:
@@ -247,4 +259,4 @@ Text: ['mr', 'welchs', 'view', 'consumer', 'electronics', 'main', 'job', 'give',
 ID: line-n.w8_110:14049:
 Text: ['microsoft', 'done', 'much', 'better', 'job', 'delivering', 'new', 'products', 'market', 'lotus', 'mr', 'sherlund', 'said', 'seem', 'get', 'bang', 'r&amp;d', 'line', 'lotus']
 
-Time Executed : 0.09703397750854492 seconds.
+Time Executed : 0.09687018394470215 seconds.
