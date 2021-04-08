@@ -108,7 +108,7 @@ def process_text(unprocessed_text):
     other_forms = 'lines'   # indicate other forms of the root word   
     unprocessed_text = unprocessed_text.replace(other_forms, ps.stem(other_forms))   # convert lines to line using the stemmed root word
     
-    # remove sumbols that due to html tags
+    # remove symbols that due to html tags
     processed_text = [re.sub(r'[\.\,\?\!\'\"\-\_/]','',w) for w in unprocessed_text.split(" ")]
     
     # remove stopwords and punctuation 
