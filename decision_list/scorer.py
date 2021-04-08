@@ -159,19 +159,15 @@ test_data = extract_test_data(testing_data)
 
 incorrect_senses = []   
 for key in keys:
-    if(current_sense[key]) != pred_sense[key]:
-        print(len(current_sense.items()))
-        #key, value = current_sense.items()
-        #print(key)
-        #incorrect_senses.append(value)
-        
-        #print(current_sense.keys())
-        #for item in test_data:
-        #    print(item.get('text'))
-            #print(list(current_sense.keys())[0])
-        #print(test_data.get(current_sense.keys()))
-incorrect_senses = incorrect_senses[0]
-print(incorrect_senses)
+    if current_sense[key] != pred_sense[key]:
+        incorrect_senses.append(key)
+
+incorrect_context = []
+for context in test_data:
+    id1 = context["id"]
+    if id1 in incorrect_senses:
+        print("ID: " + str(context["id"]))
+        print("Text: " + str(context["text"]))
 #for key in keys:
 #    if(current_sense[key]) != pred_sense[key]:
 #        print(current_sense[key])
