@@ -1,0 +1,250 @@
+<answer instance="line-n.w8_059:8174:" senseid="phone"/>
+<answer instance="line-n.w7_098:12684:" senseid="phone"/>
+<answer instance="line-n.w8_106:13309:" senseid="phone"/>
+<answer instance="line-n.w9_40:10187:" senseid="product"/>
+<answer instance="line-n.w9_16:217:" senseid="product"/>
+<answer instance="line-n.w8_119:16927:" senseid="product"/>
+<answer instance="line-n.w8_008:13756:" senseid="product"/>
+<answer instance="line-n.w8_041:15186:" senseid="phone"/>
+<answer instance="line-n.art7} aphb 05601797:" senseid="phone"/>
+<answer instance="line-n.w8_119:2964:" senseid="product"/>
+<answer instance="line-n.w7_040:13652:" senseid="phone"/>
+<answer instance="line-n.w7_122:2194:" senseid="phone"/>
+<answer instance="line-n.art7} aphb 45903907:" senseid="phone"/>
+<answer instance="line-n.art7} aphb 43602625:" senseid="phone"/>
+<answer instance="line-n.w8_034:3995:" senseid="product"/>
+<answer instance="line-n.w8_139:696:" senseid="product"/>
+<answer instance="line-n.art7} aphb 20801955:" senseid="phone"/>
+<answer instance="line-n.w8_028:3156:" senseid="product"/>
+<answer instance="line-n.art7} aphb 19600919:" senseid="phone"/>
+<answer instance="line-n.w8_111:8071:" senseid="phone"/>
+<answer instance="line-n.w7_041:4840:" senseid="phone"/>
+<answer instance="line-n.w7_074:3928:" senseid="product"/>
+<answer instance="line-n.w8_049:15000:" senseid="product"/>
+<answer instance="line-n.w8_086:3306:" senseid="product"/>
+<answer instance="line-n.w9_8:1533:" senseid="product"/>
+<answer instance="line-n.w8_042:5289:" senseid="phone"/>
+<answer instance="line-n.w7_041:11151:" senseid="product"/>
+<answer instance="line-n.w7_059:9261:" senseid="phone"/>
+<answer instance="line-n.w9_6:10969:" senseid="phone"/>
+<answer instance="line-n.art7} aphb 41702230:" senseid="product"/>
+<answer instance="line-n.w7_004:1365:" senseid="product"/>
+<answer instance="line-n.art7} aphb 26902918:" senseid="phone"/>
+<answer instance="line-n.art7} aphb 37804749:" senseid="phone"/>
+<answer instance="line-n.w9_6:2907:" senseid="phone"/>
+<answer instance="line-n.w7_106:10827:" senseid="phone"/>
+<answer instance="line-n.art7} aphb 02400926:" senseid="product"/>
+<answer instance="line-n.w7_107:12000:" senseid="phone"/>
+<answer instance="line-n.w7_087:620:" senseid="product"/>
+<answer instance="line-n.art7} aphb 30203503:" senseid="phone"/>
+<answer instance="line-n.w9_40:10216:" senseid="product"/>
+<answer instance="line-n.art7} aphb 24500349:" senseid="phone"/>
+<answer instance="line-n.art7} aphb 02200986:" senseid="product"/>
+<answer instance="line-n.w8_024:3051:" senseid="phone"/>
+<answer instance="line-n.w7_023:17827:" senseid="phone"/>
+<answer instance="line-n.w8_142:13364:" senseid="phone"/>
+<answer instance="line-n.w8_083:14895:" senseid="phone"/>
+<answer instance="line-n.w7_117:10197:" senseid="phone"/>
+<answer instance="line-n.w8_013:14047:" senseid="product"/>
+<answer instance="line-n.w7_019:14634:" senseid="product"/>
+<answer instance="line-n.w7_017:6376:" senseid="product"/>
+<answer instance="line-n.art7} aphb 24900680:" senseid="product"/>
+<answer instance="line-n.w7_021:3496:" senseid="product"/>
+<answer instance="line-n.w9_13:9355:" senseid="phone"/>
+<answer instance="line-n.w8_098:13314:" senseid="product"/>
+<answer instance="line-n.w8_064:14051:" senseid="phone"/>
+<answer instance="line-n.w7_107:7711:" senseid="product"/>
+<answer instance="line-n.w9_40:10241:" senseid="phone"/>
+<answer instance="line-n.w7_111:6250:" senseid="phone"/>
+<answer instance="line-n.w9_31:14204:" senseid="product"/>
+<answer instance="line-n.w9_20:7066:" senseid="phone"/>
+<answer instance="line-n.w8_027:13714:" senseid="product"/>
+<answer instance="line-n.w7_006:6674:" senseid="phone"/>
+<answer instance="line-n.w7_080:1471:" senseid="product"/>
+<answer instance="line-n.w7_124:728:" senseid="product"/>
+<answer instance="line-n.w7_083:9304:" senseid="phone"/>
+<answer instance="line-n.w8_019:4936:" senseid="product"/>
+<answer instance="line-n.w9_17:14207:" senseid="product"/>
+<answer instance="line-n.w7_093:5547:" senseid="phone"/>
+<answer instance="line-n.w7_085:427:" senseid="product"/>
+<answer instance="line-n.w7_112:2163:" senseid="product"/>
+<answer instance="line-n.w7_115:6602:" senseid="phone"/>
+<answer instance="line-n.w8_081:8566:" senseid="phone"/>
+<answer instance="line-n.w8_104:2916:" senseid="product"/>
+<answer instance="line-n.w7_050:15645:" senseid="phone"/>
+<answer instance="line-n.w7_033:3398:" senseid="product"/>
+<answer instance="line-n.w9_8:3899:" senseid="product"/>
+<answer instance="line-n.art7} aphb 37805623:" senseid="phone"/>
+<answer instance="line-n.w8_016:14692:" senseid="product"/>
+<answer instance="line-n.w7_107:826:" senseid="product"/>
+<answer instance="line-n.w7_002:18532:" senseid="product"/>
+<answer instance="line-n.w7_102:12660:" senseid="product"/>
+<answer instance="line-n.w8_002:7541:" senseid="phone"/>
+<answer instance="line-n.w8_063:10855:" senseid="product"/>
+<answer instance="line-n.art7} aphb 18601882:" senseid="phone"/>
+<answer instance="line-n.w9_7:13171:" senseid="phone"/>
+<answer instance="line-n.w9_32:1867:" senseid="phone"/>
+<answer instance="line-n.w9_29:3437:" senseid="product"/>
+<answer instance="line-n.w7_019:18445:" senseid="product"/>
+<answer instance="line-n.art7} aphb 45700442:" senseid="phone"/>
+<answer instance="line-n.w8_067:14552:" senseid="product"/>
+<answer instance="line-n.w8_053:16416:" senseid="product"/>
+<answer instance="line-n.w9_12:680:" senseid="product"/>
+<answer instance="line-n.w9_8:1503:" senseid="product"/>
+<answer instance="line-n.w7_066:3322:" senseid="phone"/>
+<answer instance="line-n.w8_100:4429:" senseid="product"/>
+<answer instance="line-n.w7_104:8687:" senseid="phone"/>
+<answer instance="line-n.art7} aphb 54101892:" senseid="phone"/>
+<answer instance="line-n.w8_038:1345:" senseid="product"/>
+<answer instance="line-n.w7_126:14239:" senseid="product"/>
+<answer instance="line-n.w9_30:3935:" senseid="product"/>
+<answer instance="line-n.w9_18:11863:" senseid="product"/>
+<answer instance="line-n.w8_003:16519:" senseid="product"/>
+<answer instance="line-n.art7} aphb 29604729:" senseid="product"/>
+<answer instance="line-n.w9_38:10638:" senseid="product"/>
+<answer instance="line-n.w7_046:6144:" senseid="product"/>
+<answer instance="line-n.w8_098:14382:" senseid="product"/>
+<answer instance="line-n.w8_074:4317:" senseid="product"/>
+<answer instance="line-n.w7_011:18280:" senseid="phone"/>
+<answer instance="line-n.w8_053:3883:" senseid="phone"/>
+<answer instance="line-n.w8_040:16402:" senseid="phone"/>
+<answer instance="line-n.w7_065:13727:" senseid="product"/>
+<answer instance="line-n.w8_007:14740:" senseid="phone"/>
+<answer instance="line-n.w8_011:260:" senseid="phone"/>
+<answer instance="line-n.w7_003:8955:" senseid="product"/>
+<answer instance="line-n.w8_011:298:" senseid="phone"/>
+<answer instance="line-n.w7_122:11595:" senseid="phone"/>
+<answer instance="line-n.w9_1:4358:" senseid="phone"/>
+<answer instance="line-n.w7_108:11591:" senseid="product"/>
+<answer instance="line-n.w8_065:17112:" senseid="product"/>
+<answer instance="line-n.w8_070:8114:" senseid="phone"/>
+<answer instance="line-n.w8_011:13061:" senseid="phone"/>
+<answer instance="line-n.w7_100:15579:" senseid="product"/>
+<answer instance="line-n.w7_071:6321:" senseid="phone"/>
+<answer instance="line-n.w8_110:14049:" senseid="phone"/>
+<answer instance="line-n.w7_108:4296:" senseid="phone"/>
+<answer instance="line-n.w7_057:1203:" senseid="phone"/>
+{'condition': '-1_words_telephone', 'log_likelihood': 4.26, 'sense': 'phone'}
+{'condition': '-1_words_access', 'log_likelihood': 3.43, 'sense': 'phone'}
+{'condition': '-1_words_car', 'log_likelihood': -2.94, 'sense': 'product'}
+{'condition': '-1_words_end', 'log_likelihood': 2.83, 'sense': 'phone'}
+{'condition': '-1_words_computer', 'log_likelihood': -2.56, 'sense': 'product'}
+{'condition': '-1_words_came', 'log_likelihood': 2.56, 'sense': 'phone'}
+{'condition': '-1_words_ps2', 'log_likelihood': -2.56, 'sense': 'product'}
+{'condition': '1_words_dead', 'log_likelihood': 2.56, 'sense': 'phone'}
+{'condition': '-2_words_telephone', 'log_likelihood': 2.4, 'sense': 'phone'}
+{'condition': '-1_words_gab', 'log_likelihood': 2.4, 'sense': 'phone'}
+{'condition': '2_words_computers', 'log_likelihood': -2.4, 'sense': 'product'}
+{'condition': '-3_words_call', 'log_likelihood': 2.2, 'sense': 'phone'}
+{'condition': '-2_words_came', 'log_likelihood': 2.2, 'sense': 'phone'}
+{'condition': '-1_words_product', 'log_likelihood': -2.2, 'sense': 'product'}
+{'condition': '-1_words_direct', 'log_likelihood': 2.2, 'sense': 'phone'}
+{'condition': '-1_words_introduced', 'log_likelihood': -2.2, 'sense': 'product'}
+{'condition': '1_words_said', 'log_likelihood': -2.2, 'sense': 'product'}
+{'condition': '1_words_computers', 'log_likelihood': -2.2, 'sense': 'product'}
+{'condition': '1_words_personal', 'log_likelihood': -2.2, 'sense': 'product'}
+{'condition': '2_words_products', 'log_likelihood': -2.2, 'sense': 'product'}
+{'condition': '-3_words_ibm', 'log_likelihood': -1.95, 'sense': 'product'}
+{'condition': '-3_words_phone', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '-3_words_get', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '-3_words_telephone', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '-3_words_software', 'log_likelihood': -1.95, 'sense': 'product'}
+{'condition': '-2_words_private', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '-2_words_tollfree', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '-2_words_sell', 'log_likelihood': -1.95, 'sense': 'product'}
+{'condition': '-2_words_ibms', 'log_likelihood': -1.95, 'sense': 'product'}
+{'condition': '-2_words_introduced', 'log_likelihood': -1.95, 'sense': 'product'}
+{'condition': '-2_words_serves', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '-2_words_incs', 'log_likelihood': -1.95, 'sense': 'product'}
+{'condition': '-2_words_recently', 'log_likelihood': -1.95, 'sense': 'product'}
+{'condition': '-1_words_keep', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '-1_words_ibm', 'log_likelihood': -1.95, 'sense': 'product'}
+{'condition': '-1_words_trading', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '-1_words_private', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '-1_words_subscriber', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '-1_words_got', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '-1_words_products', 'log_likelihood': -1.95, 'sense': 'product'}
+{'condition': '-1_words_party', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '1_words_growth', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '1_words_increased', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '1_words_grew', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '1_words_went', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '1_words_frozen', 'log_likelihood': -1.95, 'sense': 'product'}
+{'condition': '1_words_service', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '2_words_line', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '2_words_dead', 'log_likelihood': 1.95, 'sense': 'phone'}
+{'condition': '-1_words_new', 'log_likelihood': -1.85, 'sense': 'product'}
+Baseline Accuracy: 57.14%
+Overall Accuracy: 74.6%
+
+Confusion matrix:
+col_0    phone  product
+row_0                  
+phone       51       11
+product     21       43
+ID: line-n.w9_40:10187:
+Text: ['callers', 'invited', 'play', 'interactive', 'games', 'movies', 'characters', 'enter', 'sweepstakes', 'course', 'run', 'dont', 'walk', 'nearest', 'theater', 'toll', 'telephone', 'services', 'mostly', 'stuff', 'pornography', 'line', 'childrens', 'horrorstory', 'santa', 'claus', 'line', 'movie', 'marketers', 'hope', 'use', 'line', 'entice', 'potential', 'moviegoers', 'especially', 'teenagers', 'young', 'adults']
+ID: line-n.w9_16:217:
+Text: ['10', 'million', 'people', 'burdened', '$18', 'billion', 'debt', 'stuck', 'defunct', 'infrastructure', 'technologically', 'untrained', 'work', 'force', 'budapest', 'offices', 'secretaries', 'often', 'work', 'groups', 'make', 'single', 'call', 'one', 'countrys', 'huge', 'peagreen', 'telephone', 'machines', 'plenty', 'levers', 'flashing', 'lights', 'poor', 'record', 'finding', 'free', 'line']
+ID: line-n.w8_008:13756:
+Text: ['taperecorded', 'voice', 'answering', 'phone', 'tells', 'callers', 'enter', 'contest', 'free', 'trip', 'london', 'includes', 'plug', 'continental', 'airline', 'stay', 'line', 'running', 'even', 'bigger', 'phone', 'bill', 'voice', 'goes', 'advertise', 'movie', 'would', 'gone', 'id', 'heard', 'enough']
+ID: line-n.w7_041:4840:
+Text: ['counter', 'trend', 'may', 'setting', 'campbells', 'godiva', 'unit', 'brand', 'started', 'introduced', 'american', 'line']
+ID: line-n.w8_049:15000:
+Text: ['currently', 'new', 'yorkbased', 'at&amp;t', 'leases', 'conventional', 'consumer', 'phones', '$270', '$885', 'month', 'telecommunications', 'company', 'added', 'begin', 'leasing', 'three', 'specialized', 'models', 'including', 'one', 'two', 'line', 'august']
+ID: line-n.w9_8:1533:
+Text: ['jackets', 'may', 'sold', 'next', 'meanwhile', 'nbc', 'sports', 'recently', 'began', 'scores', 'plus', 'yearround', '24hour', '900', 'line', 'providing', 'complex', 'array', 'scores', 'analysis', 'fan', 'news']
+ID: line-n.art7} aphb 41702230:
+Text: ['something', 'part', 'lives', 'message', 'sponsor', 'kupcinet', 'said', 'camera', 'smiled', 'red', 'light', 'went', 'immediately', 'turned', 'picked', 'telephone', 'kup', 'printed', 'dial', 'line', 'control', 'booth']
+ID: line-n.w7_106:10827:
+Text: ['fleet', 'said', 'also', 'acquired', 'lease', 'equipment', 'finances', 'offices', 'new', 'york', 'agreed', 'retain', 'staff', '40', 'providence', 'ribased', 'fleet', 'financial', 'bank', 'holding', 'company', 'operating', 'several', 'line', 'financial', 'services', 'including', 'commercial', 'trust', 'banking', 'mortgage', 'banking', 'real', 'estate', 'lending', 'investment', 'banking', 'data', 'processing']
+ID: line-n.art7} aphb 02400926:
+Text: ['thats', 'panic', 'time', 'tvs', 'cardinal', 'rule', 'programs', 'must', 'end', 'time', 'punched', 'button', 'opening', 'line', 'joe', 'behar', 'director', 'colorado', 'joe', 'weve', 'got', 'stretch']
+ID: line-n.w9_40:10216:
+Text: ['combat', 'critics', 'interactive', 'telemedia', 'los', 'angelesbased', 'firm', 'specializing', '900', 'numbers', 'entertainment', 'business', 'come', 'system', 'block', 'multiple', 'calls', 'system', 'would', 'allow', 'movie', 'line', 'example', 'accept', 'certain', 'number', 'calls', 'single', 'phone', 'number']
+ID: line-n.art7} aphb 02200986:
+Text: ['old', 'henchmen', 'yard', 'stuff', 'splendidly', 'line', 'day']
+ID: line-n.w8_024:3051:
+Text: ['establishing', 'products', 'consumers', 'said', 'easier', 'focus', 'ad', 'dollars', 'marketing', 'efforts', 'theres', 'one', 'name', 'promote', 'chevrolet', 'using', 'approach', 'geo', 'line', 'import', 'cars', 'debuts', 'fall']
+ID: line-n.w7_019:14634:
+Text: ['restrictions', 'exasperating', 'manufacturers', 'must', 'contend', 'huge', 'competitive', 'pressures', 'sparked', 'technological', 'changes', 'standard', 'telephone', 'given', 'way', 'complex', 'electronic', 'device', 'potential', 'enable', 'people', 'computers', 'office', 'machines', 'communicate', 'along', 'line', 'time']
+ID: line-n.w7_017:6376:
+Text: ['regulators', 'set', 'telephone', 'hotline', 'help', 'transition', 'said', 'patients', 'either', 'choose', 'another', 'federally', 'qualified', 'hmo', 'return', 'traditional', 'feeforservice', 'medicare', 'benefits', 'federal', 'compliance', 'officer', 'doubling', 'operator', '800', 'telephone', 'number', 'said', 'saturday', 'six', 'line', 'never', 'ringing']
+ID: line-n.art7} aphb 24900680:
+Text: ['telephoned', 'office', 'connect', 'bertha', 'cool', 'donald', 'bertha', 'said', 'heard', 'voice', 'line']
+ID: line-n.w7_021:3496:
+Text: ['new', 'products', 'announced', 'yesterday', 'phone', 'system', 'called', 'spirit', 'updated', 'merlin', 'system', 'part', 'plan', 'overhaul', 'unit', 'said', 'john', 'gus', 'blanchard', 'group', 'vice', 'president', 'charge', 'unit', 'unit', 'sells', 'phones', 'phone', 'switches', 'businesses', 'fewer', '80', 'line', 'one', 'several', 'businesses', 'at&amp;t', 'considered', 'abandoning', 'last', 'fall']
+ID: line-n.w7_107:7711:
+Text: ['caller', 'chicago', 'instance', 'could', 'call', 'chicago', 'company', 'get', 'switched', 'branch', 'office', 'new', 'york', 'without', 'paying', 'full', 'longdistance', 'rates', 'pay', 'activity', 'fcc', 'makes', 'companies', 'pay', '$25', 'month', 'certain', 'local', 'line', 'connect', 'big', 'companies', 'switchboards']
+ID: line-n.w9_20:7066:
+Text: ['worst', 'gas', 'guzzler', 'epas', 'annual', 'rating', 'isnt', 'sale', 'us', 'chrysler', 'italian', 'imports', 'twoseat', 'italianmade', 'lamborghini', 'countach', '1990', 'model', '$155000', 'sports', 'car', 'tested', 'epa', 'got', '6', 'mpg', 'city', 'driving', '10', 'mpg', 'highway', 'manufacturer', 'says', 'replacement', 'line', 'introduced', 'us', 'year']
+ID: line-n.w8_027:13714:
+Text: ['wanted', 'discuss', 'cabinet', 'appointment', 'vice', 'president', 'george', 'bush', 'thinking', 'mr', 'bush', 'nearby', 'asked', 'switchboard', 'get', 'soon', 'vice', 'president', 'line']
+ID: line-n.w7_080:1471:
+Text: ['federal', 'communications', 'commission', 'recently', 'eased', 'raunchy', 'radio', 'tv', 'shows', 'yesterday', 'started', 'cracking', 'raunchy', 'telephone', 'services', 'agency', 'launched', 'investigations', 'whether', 'two', 'california', 'companies', 'violated', 'communications', 'act', 'providing', 'lewd', 'telephone', 'messages', 'without', 'screening', 'calls', 'see', 'children', 'line']
+ID: line-n.w7_093:5547:
+Text: ['suit', 'also', 'asked', 'unspecified', 'monetary', 'damages', 'arthur', 'albert', 'runs', 'alberts', 'wife', 'said', 'heard', 'proposed', 'talking', 'cabbage', 'patch', 'line', 'might', 'also', 'nylon', 'hair', 'would', 'expect', 'royalty', 'payments', 'product']
+ID: line-n.w7_115:6602:
+Text: ['uniroyal', 'goodrich', 'tire', 'co', 'tough', 'year', 'tire', 'shipments', 'auto', 'makers', 'declined', '22%', 'rawmaterials', 'costs', 'increased', 'patrick', 'c', 'ross', 'chairman', 'chief', 'executive', 'officer', 'said', 'company', 'formed', 'august', '1986', 'merger', 'tire', 'units', 'bf', 'goodrich', 'co', 'uniroyal', 'inc', 'also', 'hurt', 'production', 'inefficiencies', 'arose', 'introduced', '24', 'new', 'tire', 'line', 'late', '1986', 'mr', 'ross', 'said', 'interview']
+ID: line-n.w8_104:2916:
+Text: ['works', 'formica', 'desk', 'stacked', 'high', 'newspapers', 'mail', 'open', 'new', 'york', 'newsroom', 'dozen', 'people', 'two', 'phones', 'seldom', 'stop', 'ringing', 'plus', 'line', 'best', 'sources', 'network', 'traders', 'raiders', 'sundry', 'tipsters']
+ID: line-n.w9_8:3899:
+Text: ['biggest', 'flurry', 'investor', 'activity', 'came', 'early', 'day', 'vanguard', 'group', 'inc', 'saw', 'heavy', 'exchanges', 'stock', 'funds', 'money', 'market', 'funds', 'telephone', 'line', 'opened', '8:30']
+ID: line-n.w8_002:7541:
+Text: ['blame', 'troubles', 'mr', 'jones', 'sincedeparted', 'nautilus', 'executives', '(their', 'people', 'jones', 'holdovers)', 'say', 'spent', 'aggressively', 'diversification', 'effort', 'upbeat', 'new', 'products', 'line', 'exercise', 'machines', 'handicapped', 'people', 'computerized', 'medical', 'machines', 'designed', 'diagnose', 'treat', 'bad', 'backs', '(in', 'competition', 'mr', 'joness', 'new', 'device)', 'maladies', 'excited', 'medical', 'line', 'says', 'mr', 'bonney']
+ID: line-n.w9_8:1503:
+Text: ['use', '900', 'toll', 'numbers', 'expanding', 'rapidly', 'recent', 'years', 'highcost', 'pornography', 'line', 'services', 'tempt', 'children', 'dial', '(and', 'redial)', 'movie', 'music', 'information', 'earned', 'service', 'somewhat', 'sleazy', 'image', 'new', 'legal', 'restrictions', 'aimed', 'trimming', 'excesses']
+ID: line-n.w7_104:8687:
+Text: ['family', 'david', 'grutman', 'barco', 'vice', 'president', 'agreed', 'tender', 'donners', '600000', 'shares', 'controls', 'barco', 'said', 'michael', 'donner', 'said', 'family', 'hasnt', 'immediate', 'plans', 'expand', 'company', 'develop', 'existing', 'line', 'business', 'founded', 'elder', 'mr', 'donners', 'stepfather', '1929']
+ID: line-n.art7} aphb 29604729:
+Text: ['thanks', 'anyway', 'transatlantic', 'line', 'died']
+ID: line-n.w8_074:4317:
+Text: ['communications', 'company', 'also', 'built', 'small', 'callswitching', 'room', 'home', 'shoppings', 'building', 'beefed', 'parts', 'network', 'handle', 'additional', 'traffic', 'mcis', 'line', 'traffic', 'switched', 'rockwell', 'international', 'corp', 'automatic', 'call', 'distributor;', 'system', 'also', 'uses', 'unisys', 'corp', 'ordering', 'equipment']
+ID: line-n.w9_1:4358:
+Text: ['additional', 'technology', 'personnel', 'training', 'promotional', 'effort', 'expensive', 'chemical', 'bank', 'spent', '$50', 'million', 'introduce', 'chemplus', 'line', 'several', 'packages', 'aimed', 'different', 'segments', '1986', 'according', 'thomas', 'jacob', 'senior', 'vice', 'president', 'marketing']
+ID: line-n.w7_071:6321:
+Text: ['mr', 'welchs', 'view', 'consumer', 'electronics', 'main', 'job', 'give', 'ge', 'greater', 'buying', 'clout', 'business', 'pacific', 'rim', 'adding', 'volume', 'components', 'purchased', 'despite', 'fact', 'mr', 'welch', 'regards', 'consumer', 'electronics', 'something', 'albatross', 'security', 'analysts', 'say', 'even', 'ge', 'eventually', 'exits', 'tvset', 'manufacturing', 'continue', 'market', 'consumer', 'electronics', 'valuable', 'ge', 'brand', 'recognition', 'benefits', 'profitable', 'consumer', 'line', 'light', 'bulbs', 'major', 'appliances']
+ID: line-n.w8_110:14049:
+Text: ['microsoft', 'done', 'much', 'better', 'job', 'delivering', 'new', 'products', 'market', 'lotus', 'mr', 'sherlund', 'said', 'seem', 'get', 'bang', 'r&amp;d', 'line', 'lotus']
+
+Time Executed : 0.09703397750854492 seconds.
