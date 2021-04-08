@@ -9,7 +9,11 @@ Description: This Python program implements a decision list classifier to perfor
 (Paper titled "DECISION LISTS FOR LEXICAL AMBIGUITY RESOLUTION: Application to Accent Restoration in Spanish and French). The program uses 6 features from a training set
 of data ranging from -3 to +3, based on the paper. The program uses a training file with answers to instruct the sense of an ambiguous word.
 
-Libraries used: NLTK, RE, MATH, SYS, BS4
+Libraries used: NLTK, RE, MATH, SYS, BEAUTIFULSOUP, STRING, PANDAS
+
+Additional features (for extra credit):
+- Timer calculates time it takes for scorer.py to run (printed after running scorer.py)
+- List of incorrect senses and the context (printed after running scorer.py)
 
 Usage Instructions: This program must be used in combination with the scorer.py program. To use the program:
 1) Ensure all supplmentary files are placed in the correct directory
