@@ -19,6 +19,7 @@ Usage Instructions: This program must be used in combination with the scorer.py 
 	c) line-test.xml -> file that contains test data (no answers present)
 	d) my-decision-list.xml -> a log file used during debugging
 	e) my-line-answers.txt -> file containing generated answers and sense for test data based on the training data
+3) The scorer.py file is used in combination with this file to generate an confusion matrix and compare the results
  
 Algorithm defined in program:
 Step 1: Extract the training data from XML files (preprocesses stopwords, punctuation, case, and symbols during extraction).
@@ -29,8 +30,6 @@ Step 5: Extract the testing data from XML files (preprocesses stopwords, punctua
 Step 6: Use majority sense to predict the test data
 Step 7: Store decision list into my-line-answers.txt file
 
-Additional features: 
-
 Results of confusion Matrix:
 Baseline Accuracy: 57.14%
 Overall Accuracy: 74.6%
@@ -39,7 +38,6 @@ col_0    phone  product
 row_0
 phone       51       11
 product     21       43
-
 
 First 10 results of my-decision-list:
 {'condition': '-1_words_telephone', 'log_likelihood': 4.2626798770413155, 'sense': 'phone'}
@@ -74,6 +72,8 @@ Resources used for this assignment come from the materials provided in the AIT 5
 - dictionary search (https://www.kite.com/python/answers/how-to-search-if-dictionary-value-contains-certain-string-in-python)
 - sorting dictionary using lambda https://stackoverflow.com/questions/72899/how-do-i-sort-a-list-of-dictionaries-by-a-value-of-the-dictionary
 """
+
+# import libraries
 import nltk, string, re, math, sys
 from nltk.probability import ConditionalFreqDist, ConditionalProbDist, ELEProbDist
 from nltk.corpus import stopwords
@@ -116,7 +116,6 @@ def process_text(unprocessed_text):
     
     return processed_text   # return the processed text to the method that called it
 
-
 # Extract data from XML into a list
 def extract_training_data(file):
     with open(file, 'r') as data:
@@ -150,7 +149,6 @@ def extract_test_data(file):
         
     return extracted_data
 
-
 #This function extracts the collocative word for the ambigious word given n 
 #and writes our feature rule into the decision list
 #Adapted from https://pythonexamples.org/python-find-index-of-item-in-list/
@@ -161,9 +159,9 @@ def coll_rules(n, context, sense): #searches a LIST.
         decision_list.append(rule) #adds the rule into the decision list initialized at the beginning.
     else:
         return ""
-#Based on input n (# of words away from ambigious word) iterates through all
-#the context sentences and senses in the training dataset to grab the collocative words
-#with the respective senses
+ 
+# Based on input n (# of words away from ambigious word) iterates through all the context sentences
+# and senses in the training dataset to grab the collocative words with the respective senses
 def change_coll(n):
     for i in range(0, len(train_context)):
         coll_rules(n, train_context[i], train_senses[i])
@@ -202,8 +200,7 @@ def determine_sense(most_likely_sense, context):
                 return ("product", context, rule.get(list(rule)[0]))
     return (most_likely_sense, context, "default")
         
-
-# Step 1        
+# Step 1: Extract the training data from XML files (preprocesses stopwords, punctuation, case, and symbols during extraction)       
 #Extracts the training data as a list       
 train_data = extract_training_data(training_data)    
 #Convert the training data into a dataframe
@@ -222,7 +219,7 @@ for i in range (-3, 3):
         continue
     change_coll(i)
 
-# Step 2
+# Step 2: Store conditional probability distributions of training data in decision list.
 #https://stackoverflow.com/questions/15145172/nltk-conditionalfreqdist-to-pandas-dataframe
 #Convert the decision list into a dataframe
 dec_df = pd.DataFrame(decision_list) 
@@ -232,24 +229,21 @@ dec_df.columns = ['w', 'coll', 'sense']
 dec_df["condition"] = dec_df["w"] + dec_df["coll"]
 #The new dataframe will have just the 2 columns.
 decision_df = dec_df[['condition', 'sense']]
-
 #Converting the dataframe back to a list so that there's no seperation between n and the coll_word
 dec_list = decision_df.values.tolist()
+
 #Performing the conditional frequency for the decision list of rules.
 #https://lost-contact.mit.edu/afs/cs.pitt.edu/projects/nltk/docs/tutorial/probability/conditionalfreqdist.html
 dec_cfd = nltk.ConditionalFreqDist(dec_list) 
-
-#https://stackoverflow.com/questions/62603854/conditional-frequency-distribution-using-browns-corpus-nltk-python
 # Creating dataframe of conditional frequency
+#https://stackoverflow.com/questions/62603854/conditional-frequency-distribution-using-browns-corpus-nltk-python
 df_cfdist = pd.DataFrame.from_dict(dec_cfd , orient='index')
-
 #https://www.kite.com/python/docs/nltk.ConditionalProbDist
 #https://lost-contact.mit.edu/afs/cs.pitt.edu/projects/nltk/docs/ref/nltk.probability.ELEProbDist.html
-
 cpdist = ConditionalProbDist(dec_cfd , ELEProbDist, 2)
 
-# Creating sense list
-# Grabbing cpdist values of the senses and the conditions and storing it in a separate list
+# Create a list of the senses for the ambiguous word
+# Grab cpdist values of the senses and the conditions and storing it in a separate list
 cond_list = []
 sense1_list  = []
 sense2_list = []
@@ -285,7 +279,7 @@ for item in log_likelihood:
         sense = "product"
         sense_assign.append(sense)
 
-# Step 3      
+# Step 3: Search the training data to count the frequency of each sense.    
 # extract the training data from the XML file   
 train_data = extract_training_data(training_data)
 
@@ -300,7 +294,7 @@ for i in range(0, len(train_data)):
     elif 'product' in list(train_data[i].values()):
         sense2 = sense2 + 1
 
-# Step 4
+# Step 4: Calculate the majority sense based frequency likelihood for rules
 # Calculating which sense occurs most often
 most_likely_sense = "phone" if sense1 > sense2 else "product"
 
@@ -310,18 +304,18 @@ dec_list = create_dict(cond_list, log_likelihood, sense_assign)
 # Sorting decision dictionary in reverse
 sorted_dec_list = sorted(dec_list, key=lambda k: math.fabs(k['log_likelihood']), reverse=True)
 
-# Step 5
+# Step 5: Extract the testing data from XML files (preprocesses stopwords, punctuation, case, and symbols during extraction).
 # Extract testing data into list
 test_data = extract_test_data(testing_data)
 
-# Step 6
+# Step 6: Use majority sense to predict the test data
 # Performing prediction on testing data
 for element in test_data:
     pred = determine_sense(most_likely_sense, element['text'])
     id1 = element['id']
     print(f'<answer instance="{id1}" senseid="{pred[0]}"/>')
 
-# Step 7
+# Step 7: Store decision list into my-line-answers.txt file
 # Storing the decision list into a file
 writer = open(my_decision_list, 'w')   # open the text file
 

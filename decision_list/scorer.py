@@ -14,21 +14,46 @@ Usage Instructions: This program must be used in combination with the scorer.py 
 	a) scorer.py -> this file
 	b) my-line-answers.txt -> generated file from decision-list.py
 	c) line-answers.txt -> baseline file with ansers for each sense
-	
-2) The baseline accuracy, accuracy after adding features and confusion matrix are printed.
+3) The baseline accuracy, accuracy after adding features and confusion matrix are printed.
  
 Algorithm defined in program:
-
-
-Additional features:  
+Step 1: Retrieve the my-line-answers.txt data file created by decision-list.py as predicted sense
+Step 2: Retrieve the line-answers.txt data file as current sense
+Step 3: Calculate and print the baseline accuracy based on the line-answers.txt file provided
+Step 4: Create and print a confusion matrix based on the my-line-answers.txt file provided
 
 Results of confusion Matrix:
+Baseline Accuracy: 57.14%
+Overall Accuracy: 74.6%
+Confusion matrix is
+col_0    phone  product
+row_0
+phone       51       11
+product     21       43
 
 First 10 results of my-decision-list:
+<answer instance="line-n.w8_059:8174:" senseid="phone"/>
+<answer instance="line-n.w7_098:12684:" senseid="phone"/>
+<answer instance="line-n.w8_106:13309:" senseid="phone"/>
+<answer instance="line-n.w9_40:10187:" senseid="phone"/>
+<answer instance="line-n.w9_16:217:" senseid="phone"/>
+<answer instance="line-n.w8_119:16927:" senseid="product"/>
+<answer instance="line-n.w8_008:13756:" senseid="phone"/>
+<answer instance="line-n.w8_041:15186:" senseid="phone"/>
+<answer instance="line-n.art7} aphb 05601797:" senseid="phone"/>
+<answer instance="line-n.w8_119:2964:" senseid="product"/>
 
 First 10 results my-line-answers.txt:
-
-
+<id="line-n.w8_059:8174:" sense="phone"/>
+<id="line-n.w7_098:12684:" sense="phone"/>
+<id="line-n.w8_106:13309:" sense="phone"/>
+<id="line-n.w9_40:10187:" sense="product"/>
+<id="line-n.w9_16:217:" sense="product"/>
+<id="line-n.w8_119:16927:" sense="product"/>
+<id="line-n.w8_008:13756:" sense="product"/>
+<id="line-n.w8_041:15186:" sense="phone"/>
+<id="line-n.art7} aphb 05601797:" sense="phone"/>
+<id="line-n.w8_119:2964:" sense="product"/>
 
 '''
 import pandas as pd
@@ -110,7 +135,7 @@ def process_text(unprocessed_text):
     return processed_text   # return the processed text to the method that called it
 
 
-#open the two files taken as input from command line and strip out '\n'
+# open the two files taken as input from command line and strip out '\n'
 with open(baseline_file, 'r') as data:
     mylist1 = [line.rstrip('\n') for line in data]
 current_sense, keys = all_word_senses(mylist1)
