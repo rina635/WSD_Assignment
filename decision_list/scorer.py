@@ -70,7 +70,7 @@ from bs4 import BeautifulSoup
 #and the gold standard "key" data (key_file)
 generated_file = sys.argv[1]
 key_file = sys.argv[2]
-testing_data = sys.argv[3]
+testing_data = "line-test.xml"
 
 #stores the current time of the request from user as the 'start time'
 start_time = time.time()
