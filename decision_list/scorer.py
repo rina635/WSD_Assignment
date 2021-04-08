@@ -202,6 +202,7 @@ for key in keys:
         incorrect_senses.append(key)
 
 # printing incorrect sense predictions with corresponding context
+print('\nBelow listed are the incorrectly classified senses and their contents:')
 incorrect_context = []
 for context in test_data:
     id1 = context["id"]
