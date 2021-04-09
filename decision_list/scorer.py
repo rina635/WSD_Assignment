@@ -10,23 +10,25 @@ Libraries used: RE, SYS, PANDAS, IMPORTLIB, STRING, TIME, NLTK, BEAUTIFULSOUP
 
 Additional features (for extra credit):
 - Timer calculates time it takes for scorer.py to run (printed after running scorer.py)
-- List of incorrect senses and the context (printed after running scorer.py)
+- List of all instances in the test data the WSD classifier incorrectly sorted (printed after running scorer.py)
 
-Usage Instructions: This program must be used in combination with the scorer.py program. To use the program:
+Usage Instructions: This program is used to evaluate the WSD Classifier from decision-list.py. To use the program:
 1) Ensure all supplmentary files are placed in the correct directory
 2) In the terminal, run the command "python scorer.py my-line-answers.txt line-answers.txt" or "python scorer.py my-line-answers.txt line-answers.txt line-text.xml"
 	a) scorer.py -> this file
 	b) my-line-answers.txt -> generated file from decision-list.py
-	c) line-answers.txt -> baseline file with ansers for each sense
-3) The baseline accuracy, accuracy after adding features and confusion matrix are printed.
+	c) line-answers.txt -> "gold standard" key data file
+3) The final outputs printed in the command line are: The baseline accuracy, overall accuracy (after adding features) and confusion matrix.
+    Additionally, the time executed and list of incorrectly classified senses.
+4. All the contents from Step 3 will be found in the 'decision-list-log.txt' file.
  
 Algorithm defined in program:
-Step 1: Retrieve the my-line-answers.txt data file created by decision-list.py as predicted sense
-Step 2: Retrieve the line-answers.txt data file as current sense
-Step 3: Calculate and print the baseline accuracy based on the line-answers.txt file provided
-Step 4: Create and print a confusion matrix based on the my-line-answers.txt file provided
+Step 1: Retrieve the my-line-answers.txt data file created by decision-list.py (generated_file)
+Step 2: Retrieve the line-answers.txt data file (key_file)
+Step 3: Calculate and print the baseline accuracy and Overall accuracy measures based on comparing the two files
+Step 4: Create and print a confusion matrix to evaluate the number of correctly classified contexts.
 
-Results of confusion Matrix:
+Results:
 Baseline Accuracy: 57.14%
 Overall Accuracy: 74.6%
 Confusion matrix is
@@ -199,14 +201,14 @@ print("Confusion matrix:\n"  +str(df_confusion))
 # Extract testing data into list
 test_data = extract_test_data(testing_data)
 
-# creating a list of incorrect senses based on predicitons
+# creating a list of incorrect senses based on which ones were not equal to the key
 incorrect_senses = []   
 for key in keys:
     if correct_sense[key] != pred_sense[key]:
         incorrect_senses.append(key)
 
 # printing incorrect sense predictions with corresponding context
-print('\nBelow listed are the incorrectly classified senses and their contents:')
+print('\nBelow listed are the incorrectly classified senses and their contexts:')
 incorrect_context = []
 for context in test_data:
     id1 = context["id"]
