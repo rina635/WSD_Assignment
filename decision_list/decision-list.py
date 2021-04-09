@@ -5,19 +5,24 @@ AIT 590 - Assignment 3
 Team 3 - Rafeef Baamer, Ashish Hingle, Rina Lidder, & Andy Nguyen
 Date: 3/31/2021
 
-Description: This Python program implements a decision list classifier to perform word sense disambiguation. The methodology used is based on Yarowsky's method for WSD
-(Paper titled "DECISION LISTS FOR LEXICAL AMBIGUITY RESOLUTION: Application to Accent Restoration in Spanish and French). The program uses 6 features from a training set
-of data ranging from -3 to +3, based on the paper. The program uses a training file with answers to instruct the sense of an ambiguous word.
+Description: This Python program implements a decision list classifier to perform word sense disambiguation for the word 'line'. 
+The methodology used is based on Yarowsky's method for WSD (Paper titled "DECISION LISTS FOR LEXICAL AMBIGUITY RESOLUTION: Application 
+to Accent Restoration in Spanish and French"). 
+
+The program uses a supervised machine learning algorithm based upon collocational words, words that are found -3 to +3 away from the 
+ambitious word ‘line’. The algorithm extracts collocational words from the training dataset to develop rules it will then apply to 
+appropriate classify ‘line’ to its correct word sense.
 
 Libraries used: NLTK, RE, MATH, SYS, BS4
 
 Usage Instructions: This program must be used in combination with the scorer.py program. To use the program:
 1) Ensure all supplmentary files are placed in the correct directory
 2) In the terminal, run the command "python decision-list.py line-train.xml line-test.xml my-decision-list.txt > my-line-answers.txt"
-	a) decision-list.py -> this file
+	a) decision-list.py -> Will run this classifier file.
 	b) line-train.xml -> file that contains training data with answers for each sense of the ambiguous word
 	c) line-test.xml -> file that contains test data (no answers present)
-	d) my-decision-list.xml -> a log file used during debugging
+	d) my-decision-list.xml -> Output file that contains the rules developed from the classifier, 
+                                in order of log-likelihood - Measure of how good of a predictor the rule is for WSD.
 	e) my-line-answers.txt -> file containing generated answers and sense for test data based on the training data
 3) The scorer.py file is used in combination with this file to generate an confusion matrix and compare the results
  
