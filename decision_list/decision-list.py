@@ -13,7 +13,11 @@ The program uses a supervised machine learning algorithm based upon collocationa
 ambitious word ‘line’. The algorithm extracts collocational words from the training dataset to develop rules it will then apply to 
 appropriate classify ‘line’ to its correct word sense.
 
-Libraries used: NLTK, RE, MATH, SYS, BS4
+Libraries used: NLTK, RE, MATH, SYS, BEAUTIFULSOUP, STRING, PANDAS
+
+Additional features (for extra credit):
+- Timer calculates time it takes for scorer.py to run (printed after running scorer.py)
+- List of incorrect senses and the context (printed after running scorer.py)
 
 Usage Instructions: This program must be used in combination with the scorer.py program. To use the program:
 1) Ensure all supplmentary files are placed in the correct directory

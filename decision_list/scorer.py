@@ -6,7 +6,11 @@ Date: 3/31/2021
 Description: This Python program scores the decision list created by decision_list.py. A confusion matric is generated based on the results of the 
 trained and tested data to be compared against a baseline.
 
-Libraries used: RE, SYS, PANDAS
+Libraries used: RE, SYS, PANDAS, IMPORTLIB, STRING, TIME, NLTK, BEAUTIFULSOUP
+
+Additional features (for extra credit):
+- Timer calculates time it takes for scorer.py to run (printed after running scorer.py)
+- List of incorrect senses and the context (printed after running scorer.py)
 
 Usage Instructions: This program must be used in combination with the scorer.py program. To use the program:
 1) Ensure all supplmentary files are placed in the correct directory
