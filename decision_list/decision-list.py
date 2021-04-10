@@ -28,7 +28,7 @@ Usage Instructions: This program must be used in combination with the scorer.py 
 	d) my-decision-list.xml -> Output file that contains the rules developed from the classifier, 
                                 in order of log-likelihood - Measure of how good of a predictor the rule is for WSD.
 	e) my-line-answers.txt -> file containing generated answers and sense for test data based on the training data
-3) The scorer.py file is used in combination with this file to generate an confusion matrix and compare the results
+3) To evaluate the results generated from this file, run the scorer.py file.
  
 Algorithm defined in program:
 Step 1: Extract the training data from XML files (preprocesses stopwords, punctuation, case, and symbols during extraction).
@@ -37,9 +37,9 @@ Step 3: Search the training data to count the frequency of each sense.
 Step 4: Calculate the majority sense based frequency likelihood for rules
 Step 5: Extract the testing data from XML files (preprocesses stopwords, punctuation, case, and symbols during extraction).
 Step 6: Use majority sense to predict the test data
-Step 7: Store decision list into my-line-answers.txt file
+Step 7: Store decision list into my-decision-list.txt file
 
-Results of confusion Matrix:
+Results:
 Baseline Accuracy: 57.14%
 Overall Accuracy: 74.6%
 Confusion matrix is
@@ -324,11 +324,11 @@ for element in test_data:
     id1 = element['id']
     print(f'<answer instance="{id1}" senseid="{pred[0]}"/>')
 
-# Step 7: Store decision list into my-line-answers.txt file
+# Step 7: Store decision list into my-decision-list.txt file
 # Storing the decision list into a file
 writer = open(my_decision_list, 'w')   # open the text file
 
-# loop through the decision list and write it to file with correct formatting
+# loop through the decision list and write it to file.
 for i in sorted_dec_list:         
     writer.write('%s\n' % i)
 
